@@ -1,0 +1,507 @@
+================================================================================
+NOVO NORDISK (NVO) - BEATEN-DOWN VALUE STOCK DEEP DIVE
+Date: March 17, 2026 | Analyst Research Report
+Stock down ~73% from ATH of $142.44 (June 25, 2024)
+================================================================================
+
+================================================================================
+SECTION 1: QUANTITATIVE DATA
+================================================================================
+
+1.  CURRENT STOCK PRICE (NVO ADR):        $38.53 (as of March 17, 2026)
+
+2.  52-WEEK HIGH / LOW:                   $82.57 / $35.85
+    - Current price is 53% below 52-week high
+    - Only 7.5% above 52-week low ($35.85)
+    - 52-week low hit ~March 3, 2026 at $35.91
+
+3.  MARKET CAP:                           $172.0B
+
+4.  ENTERPRISE VALUE:                     ~$186.5B (estimated)
+    - Market Cap $172.0B + Net Debt ~$14.5B (DKK 99.3B / ~6.85 USD/DKK)
+    - Note: DKK net debt = 99,340M DKK; using approximate exchange rate
+
+5.  FORWARD P/E:                          12.21x (based on NTM consensus ~$3.15)
+    TRAILING P/E:                         10.87x (based on LTM EPS $3.54)
+
+6.  EV/EBITDA:                            ~8.5x
+    - EV ~$186.5B / EBITDA ~$21.8B (DKK 149,640M / ~6.85)
+
+7.  P/FCF (Price to Free Cash Flow):      ~20.0x
+    - Market Cap $172.0B / FCF ~$8.6B (DKK 58,962M / ~6.85)
+
+8.  EV/SALES:                             ~3.8x
+    - EV ~$186.5B / Revenue ~$48.6B
+
+9.  EPS LTM (Last Twelve Months, ADR):    $3.54 (FY 2025 reported)
+    - Note: stockanalysis shows $3.62 TTM; DKK 23.03 diluted / ~6.5 DKK/share
+    - Macrotrends shows $3.49 for FY2025; using $3.54 as midpoint
+
+10. EPS NTM (Next Twelve Months):         ~$3.15 (consensus)
+    - Stockanalysis consensus: DKK 22.12 for 2026 (~$3.15 at ADR conversion)
+    - Reflects -3.96% YoY decline from 2025
+
+11. EPS 3-YEAR CAGR (2022-2025):          ~12.7%
+    - 2022 EPS: ~$2.47 (split-adjusted)
+    - 2025 EPS: ~$3.54
+    - CAGR = (3.54/2.47)^(1/3) - 1 = ~12.7%
+
+12. REVENUE LTM ($B USD):                 ~$48.6B
+    - DKK 309,064M; converted at ~DKK 6.36/USD (avg 2025 rate)
+    - Stockanalysis reports $48.59B TTM
+
+13. REVENUE NTM ($B consensus):           ~$43-45B (estimated)
+    - 2026 guidance: -5% to -13% sales growth at CER
+    - Consensus: DKK 296.94B (~$43.4B at current rates)
+
+14. EBITDA MARGIN:                        48.4% (FY 2025)
+    - DKK 149,640M EBITDA / DKK 309,064M revenue
+    - Down from 50.8% in FY 2024
+
+15. NET DEBT ($B):                        ~$14.5B
+    - DKK 99,340M net debt (total debt DKK 132,984M - cash DKK 26,464M)
+    - Converted at ~6.85 DKK/USD
+
+16. NET DEBT / EBITDA:                    0.66x
+    - DKK 99,340M / DKK 149,640M = 0.66x
+    - Very conservative leverage
+
+17. INTEREST COVERAGE RATIO:              ~14-48x (range depending on methodology)
+    - GuruFocus reports TTM interest coverage of 13.8 (quarterly annualized)
+    - EBIT-based: DKK 140.6B / interest ~DKK 2.9B = ~47.9x
+    - Either way: well-covered
+
+18. CREDIT RATING:
+    - S&P: AA- (stable) [historical; may be under review]
+    - Moody's: Aa3 (equivalent)
+    - Note: Debt-to-equity has risen from 10.6% to 63.1% over 5 years
+
+19. FCF LTM ($B):                         ~$8.6B
+    - DKK 58,962M; -20.1% YoY decline
+    - FY 2024 FCF was DKK 73,804M (~$10.8B)
+    - Decline driven by massive capex ramp
+
+20. CAPEX / REVENUE:                      19.4%
+    - Capex DKK 60,100M / Revenue DKK 309,064M = 19.4%
+    - Up from 16.3% in FY 2024 (DKK 47,200M)
+    - Heavy manufacturing capacity build-out
+
+21. DIVIDEND YIELD:                       3.20%
+    - Annual dividend: ~$1.23/ADR share
+    - DKK 11.70 per share (FY 2025)
+
+22. ANALYST CONSENSUS:
+    - Strong Buy: 2
+    - Buy: 0
+    - Hold: 7
+    - Sell: 2
+    - Total: 11 analysts
+    - Consensus: HOLD
+
+23. ANALYST PRICE TARGETS:
+    - Average: $51.00 (+32.4% upside)
+    - Median: $47.00
+    - High: $70.00
+    - Low: $41.00
+
+24. LARGE PHARMA SECTOR AVERAGE FORWARD P/E:
+    - LLY: 28.5x
+    - ABBV: 15.2x
+    - MRK: 22.5x
+    - PFE: 9.0x
+    - Sector average (these 4): ~18.8x
+    - Broader large-cap pharma: ~15-17x (estimated)
+    - NVO at 12.2x trades at a 35% discount to peer average
+
+25. NVO 5-YEAR HISTORICAL AVERAGE P/E:    ~35-40x (estimated)
+    - NVO traded at growth-stock premiums during 2020-2024
+    - Peak P/E was ~50x+ during the 2023-2024 GLP-1 euphoria
+    - Current 10.9x trailing P/E is the lowest in over a decade
+    - Represents ~70% compression from 5-year average
+
+26. PEER AVERAGE EV/EBITDA:
+    - LLY: ~30x (EV ~$870B / EBITDA ~$28.3B)
+    - ABBV: ~15x (est. based on $392B MC, high debt, ~$27B EBITDA est.)
+    - MRK: ~13x (est. based on $287B MC + ~$30B debt, EBITDA ~$25B est.)
+    - PFE: ~10x (est. based on $155B MC + debt, EBITDA ~$18B est.)
+    - Peer average: ~17x
+    - NVO at ~8.5x trades at a 50% discount to peer average
+
+================================================================================
+SECTION 2: QUALITATIVE DATA
+================================================================================
+
+27. WHY DID IT SELL OFF? (Multiple compounding factors)
+    -------------------------------------------------------
+    a) CagriSema REDEFINE 1 Trial Miss (Dec 20, 2024):
+       - Phase 3 showed 22.7% weight loss, missing the ~25% expectation
+       - Stock dropped ~19% in a single day
+       - Raised fears NVO's next-gen obesity drug can't compete with LLY's Zepbound
+
+    b) CagriSema REDEFINE 4 Head-to-Head Loss (Feb 23, 2026):
+       - CagriSema achieved 23.0% weight loss vs. tirzepatide's 25.5%
+       - Primary endpoint NOT achieved
+       - Stock dropped ~16% on the day
+
+    c) 2026 Guidance Cut (Feb 3, 2026):
+       - Guided -5% to -13% sales and operating profit decline at CER
+       - 8-10% below consensus at midpoint
+       - First annual sales decline since 2017
+       - Stock fell 18% on Feb 4, touched $35.91 low on March 3
+
+    d) MFN Pricing Deal (Nov 2025):
+       - Novo agreed to cut Ozempic/Wegovy prices to ~$350/month from $1,000+
+       - Massive immediate revenue per-unit impact
+
+    e) IRA Medicare Negotiation (effective Jan 2027):
+       - Ozempic MFP set at $276.67/syringe (71% discount to list)
+       - Wegovy MFP at $385.63/4 syringes
+       - Medicare spent $14.43B on semaglutide products in 2023-2024
+
+    f) Securities Fraud Investigations:
+       - Class Action 1 (Moon v. Novo Nordisk): Alleging CagriSema trial
+         design was misrepresented (flexible vs. fixed dosing)
+         Class period: Nov 2, 2022 - Dec 19, 2024
+       - Class Action 2 (Barta v. Novo Nordisk): Alleging overestimation
+         of ability to capture compounded GLP-1 patients
+         Class period: May 7, 2025 - July 28, 2025
+
+    g) Repeated 2025 Guidance Cuts:
+       - Forecast trimmed 3 times during 2025
+       - July 29, 2025: worst single-day drop ~20% on guidance cut
+
+    h) Alzheimer's Trial Failure (Nov 2025):
+       - EVOKE and EVOKE+ trials failed to slow cognitive deterioration
+       - Stock hit 4-year low ~$45
+
+    i) Market Share Loss to Eli Lilly:
+       - NVO's GLP-1 market share fell from ~60% to ~40%
+       - LLY now holds ~58-60% of US GLP-1 prescriptions
+
+    j) Leadership Overhaul + Restructuring:
+       - ~9,000 jobs cut (11% of workforce)
+       - Board overhauled by Novo Nordisk Foundation
+       - New CEO Maziar Mike Doustdar
+
+28. ZENAGAMTIDE (AMYCRETIN) PHASE 3 PLANS:
+    - Phase 3 AMAZE program initiated Q1 2026 for obesity
+    - Testing both injectable (SC weekly) and oral (daily) formulations
+    - Phase 2 showed up to 22% weight loss over 36 weeks
+    - Diabetes Phase 3 also planned for 2026
+    - Dual GLP-1/amylin receptor agonist mechanism
+    - Considered NVO's most important next-gen asset after CagriSema
+    - UBT251 (triple agonist with Chinese partner) also in development:
+      ~20% weight loss in 24-week trial
+
+29. ORAL WEGOVY COMMERCIAL TRACTION:
+    - Launched in early 2026 (first GLP-1 pill for obesity)
+    - Hit 50,000 weekly prescriptions in under 3 weeks
+    - Over 170,000 patients on oral Wegovy within ~4 weeks of launch
+    - "More than double the previous branded anti-obesity drugs launched"
+    - ~16.6% weight loss efficacy
+    - HOWEVER: Goldman Sachs projects LLY's orforglipron will eventually
+      dominate the oral GLP-1 segment (60% share vs NVO's 21% by 2030)
+    - Key disadvantage: must be taken on empty stomach with 30-min fast
+    - LLY's pill can be taken anytime with or without food
+
+30. CAGRISEMA HIGHER-DOSE TRIAL PLANS:
+    - CagriSema 2.4 mg/7.2 mg (tripled semaglutide dose) Phase 3 planned
+    - Trial initiation: H2 2026
+    - Current CagriSema: 2.4 mg cagrilintide + 2.4 mg semaglutide
+    - Rationale: higher-dose Wegovy showed ~21% weight loss vs 15-16% standard
+    - REDEFINE 11 trial (CagriSema 2.4/2.4 full potential): data H1 2027
+    - NDA submitted to FDA Dec 2025 (standard dose); decision expected late 2026
+
+31. MASH PIPELINE (AKERO ACQUISITION) STATUS:
+    - Acquired Akero Therapeutics in early 2024 for ~$1.3B
+    - Lead asset: Efruxifermin (EFX), an FGF21 analog
+    - Was in Phase 2b/3 HARMONY study for MASH with liver fibrosis
+    - UPDATE: Novo has wound down early-stage non-metabolic programs including
+      liver disease, concentrating resources on core obesity/diabetes
+    - Status of EFX specifically in 2026: unclear from available data
+    - Note: This consolidation may indicate deprioritization of MASH pipeline
+
+32. SEMAGLUTIDE CKD + HFpEF LABEL EXPANSIONS:
+    CKD: APPROVED (Jan 28, 2025)
+    - FDA approved Ozempic for reducing risk of worsening kidney disease,
+      kidney failure, and CV death in T2D + CKD patients
+    - Based on FLOW trial: 24% RRR (4.9% ARR at 3 years)
+    - Trial stopped early for efficacy (3,533 patients, 28 countries)
+    - First GLP-1 RA approved for CKD indication
+    - ~37M adults in US have CKD; 40% of T2D patients develop CKD
+
+    HFpEF: LABEL PARTIALLY EXPANDED
+    - SELECT trial: Wegovy approved March 2024 for CV risk reduction
+      (heart attack, stroke, CV death) in obese/overweight adults with CVD
+    - STEP-HFpEF data: significant improvement in symptoms, physical
+      limitations, exercise function in HFpEF + obesity
+    - Dedicated HFpEF label: status unclear; likely under regulatory review
+
+33. BALANCE SHEET HEALTH & FCF:
+    Despite the selloff, NVO's balance sheet remains solid:
+    - Net debt/EBITDA: 0.66x (very conservative)
+    - Interest coverage: 14-48x (well-covered)
+    - Credit rating: AA-/Aa3 (investment grade, near sovereign-quality)
+    - FCF LTM: $8.6B (down from $10.8B due to capex ramp)
+    - Operating cash flow: DKK 119.1B (~$17.4B) still robust
+    - Debt well-covered by operating cash flow (97.3%)
+    - Total debt: DKK 133B; total cash: DKK 26.5B
+    - D/E ratio risen to 63.1% (from 10.6% 5 years ago) but still manageable
+    - Dividend payout: DKK 51.8B (high but covered by OCF)
+
+34. M&A CAPACITY / LIKELIHOOD:
+    - With AA- credit rating and $8.6B annual FCF, NVO has significant
+      acquisition capacity
+    - Already demonstrated M&A willingness (Akero for $1.3B in 2024)
+    - Issued DKK 103.9B in new long-term debt in 2025
+    - Pipeline gaps (especially if CagriSema approval is delayed) could
+      drive further acquisitions
+    - Potential targets: next-gen obesity mechanisms, oral formulations,
+      cardio-metabolic assets
+    - UBT251 partnership with Chinese company already underway
+    - Estimated M&A capacity: $15-25B without straining balance sheet
+
+35. NVO vs LLY GLP-1 MARKET SHARE:
+    - LLY now holds ~58-60% of US GLP-1 market (up from ~47% in early 2025)
+    - NVO holds ~40-42% (down from ~53%+ in 2024)
+    - LLY overtook NVO in January 2025 and has widened the lead each quarter
+    - Combined Mounjaro + Zepbound sales: ~$37B (2025) vs NVO's Ozempic +
+      Wegovy ~$32B
+    - LLY's drugs considered clinically superior: more weight loss, better
+      safety profile
+    - Real-world data and REDEFINE 4 head-to-head confirmed LLY's advantage
+    - LLY guiding $80-83B revenue for 2026 (growth) vs NVO's -5% to -13%
+    - Goldman Sachs projects LLY will also dominate oral GLP-1 segment
+    - Medicare coverage of obesity drugs starting July 2026 benefits LLY
+      disproportionately (40M new beneficiaries)
+
+36. IRA PRICING IMPACT ON OZEMPIC/WEGOVY (STARTING JAN 2027):
+    Current List Prices:
+    - Ozempic: ~$959/month (list)
+    - Wegovy: ~$1,350/month (list)
+
+    IRA Maximum Fair Prices (effective Jan 2027):
+    - Ozempic (3mL syringe): $276.67 (71% discount to list)
+    - Wegovy (4x 0.5mL syringes): $385.63
+    - Rybelsus (30 pills): $276.78
+
+    MFN Deal Prices (supersedes IRA for Medicare):
+    - Ozempic/Wegovy: ~$245-350/month (MFN takes precedence)
+
+    Revenue at Risk:
+    - Medicare Part D spent $14.43B on semaglutide products (2023-2024 period)
+    - ~2.3M Medicare enrollees used these drugs
+    - If ~50-60% of current revenue is at Medicare prices already significantly
+      discounted, the incremental impact may be 15-25% on US semaglutide revenue
+    - US = 58% of NVO total revenue
+    - Estimated revenue at risk from IRA: $4-6B annually starting 2027
+    - Combined with MFN pricing and competition, US pricing headwind is severe
+
+================================================================================
+SECTION 3: SELLOFF TIMELINE
+================================================================================
+
+37. KEY EVENTS - ATH TO CURRENT:
+
+DATE              EVENT                                    APPROX PRICE   CHANGE
+-----------       ---------------------------------------- -------------- ------
+Jun 25, 2024      All-time high                            $142.44        --
+Dec 20, 2024      CagriSema REDEFINE 1 trial miss          ~$100-105     -19%
+                  (22.7% WL vs 25% expected)                             1-day
+Jan 2025          Continued selling; competition fears      ~$90-95       --
+Mar 2025          Multiple downgrades begin                 ~$80-85       --
+Jul 29, 2025      2025 guidance cut #3 / worst day ever    ~$55-60       -20%
+                  (compounded GLP-1 competition, slower                   1-day
+                  Wegovy uptake)
+Sep 2025          Securities fraud class action #2 filed    ~$50-55       --
+Nov 24, 2025      Alzheimer's EVOKE trial failure           ~$45          -5%
+                  (4-year low)
+Nov 2025          MFN pricing deal ($350/month)             ~$45-48       --
+                  9,000 job cuts announced
+Dec 2025          CagriSema NDA filed with FDA              ~$48-50       --
+Feb 3, 2026       2026 guidance: -5% to -13% sales decline  ~$55          --
+Feb 4, 2026       Market reaction to guidance                $47.76       -18%
+                                                                         1-day
+Feb 23, 2026      CagriSema REDEFINE 4 head-to-head loss    ~$42         -16%
+                  (23.0% vs tirzepatide 25.5%)                           1-day
+Mar 3, 2026       Wave of analyst downgrades                 $35.91       52-wk low
+Mar 17, 2026      Current                                   $38.53       -73% ATH
+
+================================================================================
+SECTION 4: PIPELINE STATUS TABLE
+================================================================================
+
+38. LATE-STAGE PIPELINE ASSETS:
+
+ASSET               MECHANISM          FORM    PHASE  TIMELINE         TAM ($B)
+-------------------  ----------------  ------  -----  --------------   --------
+CagriSema            GLP-1 + Amylin    SC inj  Filed  FDA decision     $30-50B
+(cagrilintide +      combo                      (NDA)  late 2026        (obesity)
+semaglutide 2.4/2.4)
+
+CagriSema HD         GLP-1 + Amylin    SC inj  Ph3    Initiate H2      $30-50B
+(2.4/7.2 mg)         combo                      plan   2026
+
+Amycretin/           GLP-1/Amylin      SC +    Ph3    AMAZE initiated  $30-50B
+Zenagamtide          dual agonist      Oral           Q1 2026
+
+Cagrilintide         Amylin analog     SC inj  Ph3    RENEW program    $10-20B
+(monotherapy)                                         Q4 2025 start
+
+Semaglutide 7.2mg   GLP-1 agonist     SC inj  Ph3    Ongoing          $15-25B
+(higher-dose Wegovy)
+
+Oral semaglutide     GLP-1 agonist     Oral    MKTD   Launched early   $22B oral
+(oral Wegovy)                                         2026              mkt by 2030
+
+Mim8                 FVIIIa mimetic    SC inj  Filed  BLA submitted    $5-8B
+                     bispecific Ab             (BLA)  to FDA           (hemophilia)
+
+Etavopivat           Pyruvate kinase   Oral    Ph3    Ongoing          $2-4B
+                     activator                                        (SCD)
+
+Ziltivekimab         Anti-IL-6 Ab      SC inj  Ph3    ZEUS trial       $5-10B
+                                                      ongoing          (ASCVD)
+
+Zaltenibart          MASP-3 inhibitor  --      Ph3    Planned          $3-5B
+                                               plan                    (PNH)
+
+UBT251               Triple agonist    --      Ph1/2  Early stage      $30-50B
+(Chinese partner)    (GLP-1/GIP/GCG)                                   (obesity)
+
+================================================================================
+SECTION 5: IRA IMPACT MODEL
+================================================================================
+
+39. IRA PRICING IMPACT DETAILED:
+
+CURRENT NET PRICES (estimated, pre-IRA):
+Drug          List Price    Est. Net Price*   Medicare Net*    IRA MFP
+----------    ----------    ---------------   -------------    --------
+Ozempic       $959/mo       ~$550-600/mo      ~$450-500/mo    $276.67
+Wegovy        $1,350/mo     ~$700-800/mo      ~$550-650/mo    $385.63
+Rybelsus      $936/mo       ~$500-550/mo      ~$400-450/mo    $276.78
+
+*Net prices are estimates; actual net prices are not publicly disclosed.
+The MFN deal price (~$245-350) supersedes IRA MFP for Medicare patients.
+
+REVENUE AT RISK MODEL:
+
+                                    Current     Post-IRA/MFN   Delta
+                                    --------    ------------   -----
+US Semaglutide Revenue (2025)       ~$28-30B    --             --
+Medicare Share (~30% of US)         ~$8.5-9B    ~$5-6B         -$3-4B
+Net Price Reduction                 --          ~35-45%        --
+
+Additional Factors:
+- MFN deal applies to ALL patients (not just Medicare): reduces
+  commercial prices too, but less severely
+- Compounded semaglutide continues to capture ~1M+ patients
+- Patent expirations in Brazil, Canada, China in 2026
+- Biosimilar/generic threat from 2027+
+
+Total Estimated Annual Revenue at Risk:
+- IRA/MFN pricing impact:              ~$4-6B/year starting 2027
+- Patent expiry (ex-US):               ~$1-2B/year
+- Competition (LLY market share gains): ~$2-3B/year ongoing
+- Compounding competition:              ~$1-2B/year
+- TOTAL HEADWIND:                       ~$8-13B/year by 2027-2028
+
+vs. POTENTIAL OFFSETTING TAILWINDS:
+- Oral Wegovy launch ramp:             +$2-4B by 2027
+- CagriSema approval (if late 2026):   +$1-3B initial ramp
+- Medicare obesity coverage (Jul 2026): +$2-5B market expansion
+- CKD label expansion:                 +$0.5-1B
+- Amycretin (if successful):           +$2-5B by 2028-2029
+
+================================================================================
+SECTION 6: VALUATION SUMMARY
+================================================================================
+
+VALUATION COMPARISON TABLE:
+
+Metric              NVO      LLY      ABBV     MRK      PFE     Peer Avg
+-----------         ------   ------   ------   ------   -----   --------
+Trailing P/E        10.9x    43.1x    93.8x    15.9x    19.6x   43.1x
+Forward P/E         12.2x    28.5x    15.2x    22.5x    9.0x    18.8x
+EV/EBITDA (est.)    8.5x     ~30x     ~15x     ~13x     ~10x    ~17x
+Dividend Yield      3.2%     0.6%     3.5%     3.4%     6.7%    3.6%
+Market Cap ($B)     $172     $842     $393     $287     $155     $419
+Revenue Growth      +6.4%    +44.7%   +8.6%    +6.6%    --       --
+Consensus           Hold     Buy      Buy      Buy      Hold     --
+
+NVO IS TRADING AT:
+- 35% discount to peer average forward P/E
+- 50% discount to peer average EV/EBITDA
+- 70% below its own 5-year average P/E (~35-40x)
+- Below the S&P 500 average (~20x forward)
+- Below the large-cap pharma sector average (~15-17x forward)
+
+BULL CASE: (price target ~$55-70)
+- CagriSema approved late 2026, ramps commercially
+- Oral Wegovy traction exceeds expectations (170K patients in 4 weeks)
+- Amycretin Phase 3 shows competitive data
+- Medicare obesity coverage creates massive demand tailwind
+- Balance sheet strong; FCF still $8.6B/year
+- Trading at trough valuation; mean reversion to 15-18x forward = $47-57
+- High-dose CagriSema could close the efficacy gap with tirzepatide
+
+BEAR CASE: (price target ~$25-35)
+- CagriSema approval delayed or label restricted
+- LLY continues taking market share (orforglipron dominates oral)
+- IRA + MFN pricing crushes US margins permanently
+- EPS declines further in 2026-2027
+- Compounding competition doesn't abate
+- Pipeline setbacks (amycretin fails Phase 3)
+- Securities litigation creates additional overhang
+
+BASE CASE: (price target ~$45-50, ~20-30% upside)
+- CagriSema approved with modest commercial uptake
+- EPS troughs in 2026 at ~$3.00-3.15, recovers in 2027
+- P/E re-rates to 15x forward as growth stabilizes = ~$47
+- Dividend yield provides 3.2% floor
+- Strong balance sheet prevents further deterioration
+
+KEY RISK/REWARD ASSESSMENT:
+- Downside to bear case: ~$25-35 = -9% to -35%
+- Upside to bull case: ~$55-70 = +43% to +82%
+- Risk/reward ratio: favorable at current levels (~2:1 to 3:1)
+- The market is pricing NVO as if it were a mature, declining pharma company
+- If ANY pipeline catalyst hits, significant re-rating is possible
+
+================================================================================
+DATA CONFIDENCE NOTES
+================================================================================
+
+HIGH CONFIDENCE (sourced from stockanalysis.com, SEC filings, news):
+- Current price, market cap, 52-week range, P/E ratios, EPS, revenue,
+  EBITDA margin, net debt, dividend yield, analyst consensus, pipeline events
+
+MEDIUM CONFIDENCE (derived/estimated):
+- Enterprise value (depends on exact FX rate)
+- EV/EBITDA and P/FCF (calculated from components)
+- Historical average P/E (broad range)
+- IRA revenue at risk model (based on disclosed MFPs and Medicare spend)
+- Peer EV/EBITDA (estimated from available data)
+
+LOW CONFIDENCE / N/A:
+- Exact net prices for Ozempic/Wegovy (not publicly disclosed)
+- Credit rating status post-2025 debt issuance (may have been reviewed)
+- Exact M&A capacity (depends on management willingness and market conditions)
+- Efruxifermin (MASH) program status in 2026 (may have been deprioritized)
+
+================================================================================
+SOURCES
+================================================================================
+- stockanalysis.com/stocks/nvo/ (price, financials, estimates, peer data)
+- globenewswire.com (CagriSema REDEFINE 4 results, 2026 guidance)
+- cnbc.com (GLP-1 market share, Novo vs Lilly, oral Wegovy launch)
+- fiercepharma.com (IRA Medicare negotiation, MFN pricing deal)
+- prnewswire.com (FDA Ozempic CKD approval, securities litigation)
+- biopharmadive.com (amycretin Phase 3, CagriSema higher-dose plans)
+- healthaffairs.org (IRA drug pricing analysis)
+- pharmaceutical-technology.com (2026 guidance reaction)
+- gurufocus.com (interest coverage ratio)
+================================================================================
+END OF REPORT
+================================================================================
