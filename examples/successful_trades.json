@@ -1,0 +1,89 @@
+[
+  {
+    "ticker": "BA",
+    "company": "Boeing Co.",
+    "entry_price": 190,
+    "current_price": 210,
+    "return_pct": 0.105,
+    "status": "open / early stage",
+    "entry_rationale": {
+      "why_sold_off": "737 MAX production quality issues re-emerged in 2024, FAA production cap imposed, CEO departure, multiple fatal incidents damaged brand, labor strike halted production for weeks. Stock fell from ~$265 to under $200.",
+      "selloff_type": "Company-specific operational issues, NOT secular demand decline. Air travel demand is structurally strong and growing. Boeing has a duopoly with Airbus — no substitute at scale.",
+      "is_issue_fixable": "Yes — new CEO Kelly Ortberg brought in to stabilize. Production certification issues fixable with time and investment. Backlog of 5,500+ aircraft (7-8 years of production) is intact and growing.",
+      "balance_sheet": "Highly levered (~$45B net debt), primary risk. BUT Boeing has access to capital markets, implicit government support as critical defense contractor, and backlog provides future cash flow visibility.",
+      "industry_protection": "Commercial aviation is structural growth industry globally. Defense segment (~30% of revenue) provides floor and is non-cyclical. FAA oversight barriers entry.",
+      "catalysts": ["Production ramp re-certification by FAA", "737 MAX production volume returning to 38/month target", "787 Dreamliner backlog monetization", "New CEO execution credibility building over 4-6 quarters", "Defense contract win news"],
+      "bear_case": "Regulatory action escalates, another safety incident, financing costs become unsustainable. Low probability but existential."
+    },
+    "valuation_at_entry": {
+      "price_to_sales": "0.6x — near decade lows",
+      "ev_ebitda": "Difficult to calculate due to losses, but replacement cost of assets and backlog value implied massive discount",
+      "analyst_consensus_target": "$220-240 average",
+      "implied_upside": "16-26%"
+    },
+    "key_lessons": [
+      "Duopoly businesses don't go away even in crisis",
+      "Management change is a powerful catalyst",
+      "Backlog / order book is the key valuation anchor for aerospace",
+      "High leverage is acceptable when revenue stream is contractual and long-cycle"
+    ]
+  },
+  {
+    "ticker": "VRTX",
+    "company": "Vertex Pharmaceuticals",
+    "entry_price": 400,
+    "current_price": 460,
+    "return_pct": 0.15,
+    "status": "open / performing",
+    "entry_rationale": {
+      "why_sold_off": "Pain drug suzetrigine (VX-548) Phase 3 trial showed mixed results vs. opioids. Market concern about commercial penetration. Stock pulled back 25-30% from $530 highs.",
+      "selloff_type": "Pipeline disappointment on a single non-core asset (core franchise is cystic fibrosis, not pain). Market over-extrapolated from pain drug miss to entire franchise.",
+      "is_issue_fixable": "Partially — pain drug potential is uncertain. But irrelevant to core thesis: near-monopoly on CF treatments (Trikafta/Kaftrio), 85%+ eligible patient penetration with pricing power.",
+      "balance_sheet": "Net cash ~$10B. No debt. Extraordinary FCF generation. One of the cleanest balance sheets in large-cap pharma.",
+      "industry_protection": "CF drugs are not optional — patients die without them. Pricing power is durable. No competition exists at scale.",
+      "catalysts": ["VX-522 mRNA therapy for CF", "VX-548 (pain) commercial launch data", "VX-880/VX-264 (Type 1 diabetes cell therapy)", "Inaxaplin for APOL1 kidney disease Phase 3", "CF label expansions"],
+      "bear_case": "IRA price negotiations target Trikafta. Biosimilar entry into CF (low probability). Multiple pipeline failures."
+    },
+    "valuation_at_entry": {
+      "forward_pe": "23x — premium but at discount to own history for a near-monopoly franchise",
+      "ev_ebitda": "18x NTM",
+      "analyst_consensus_target": "$470-510 average",
+      "implied_upside": "17-27%"
+    },
+    "key_lessons": [
+      "When the market punishes a stock for a non-core miss, check if core franchise is intact",
+      "Net cash balance sheets create a floor",
+      "Monopoly-like healthcare franchises deserve premium multiples",
+      "Look for situations where stock fell on 'fear of X' but X hasn't materialized in core numbers"
+    ]
+  },
+  {
+    "ticker": "GNRC",
+    "company": "Generac Holdings",
+    "entry_price": 140,
+    "current_price": 204,
+    "return_pct": 0.457,
+    "status": "open / strong performer",
+    "entry_rationale": {
+      "why_sold_off": "Post-COVID demand normalization. Home standby generator demand fell sharply from 2020-2022 highs, dealer inventories bloated. Stock collapsed from $500 peak to $120-140.",
+      "selloff_type": "Classic post-cycle mean reversion. Underlying long-term demand drivers (grid unreliability, extreme weather, electrification) are STRUCTURAL. Selloff was about demand air pocket, not permanent loss.",
+      "is_issue_fixable": "Yes — dealer inventory normalization is time-limited. Once inventory clears, shipments re-align with true underlying demand. Climate change structurally supports above-pre-COVID demand.",
+      "balance_sheet": "Net debt but manageable (~2x EBITDA at trough). FCF positive throughout downturn. No near-term maturity concerns.",
+      "industry_protection": "Home standby generators are infrastructure-adjacent. Grid investment in US accelerating; data center power demand straining grids creates permanent tailwind for backup power.",
+      "catalysts": ["Dealer inventory normalization completion", "Severe weather events", "Data center/commercial generator demand acceleration", "International expansion (Europe)", "Energy storage/clean energy portfolio (PWRcell)"],
+      "bear_case": "Inventory takes longer to clear. Mild hurricane season. Competition from Kohler. But at $140, all priced in."
+    },
+    "valuation_at_entry": {
+      "forward_pe": "18x trough earnings — cheap for structural growth with moat",
+      "ev_ebitda": "12x — well below historical 20-25x premium",
+      "analyst_consensus_target": "$180-200 range",
+      "implied_upside": "28-43%"
+    },
+    "key_lessons": [
+      "Post-cycle demand normalization is NOT a broken business",
+      "Best contrarian entries when narrative is 'COVID pull-forward is over' — find structural demand drivers",
+      "Inventory cycle turns are highly predictable",
+      "Strong brand + distribution moats survive demand air pockets"
+    ]
+  }
+]

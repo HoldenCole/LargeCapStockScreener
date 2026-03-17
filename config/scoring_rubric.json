@@ -1,0 +1,94 @@
+{
+  "framework": {
+    "description": "Each criterion is scored 0-10. Multiply by weight. Sum = Composite Score (0-10). Higher is better.",
+    "minimum_pass_score": 5.0,
+    "strong_buy_threshold": 7.5
+  },
+  "criteria": {
+    "valuation": {
+      "weight": 0.25,
+      "description": "How cheap is the stock on an absolute and relative basis?",
+      "score_guide": {
+        "9-10": "Trading at multi-year or historical trough multiples, 40%+ implied upside to DCF/consensus, clear margin of safety",
+        "7-8": "Meaningfully below historical average and peer median, 25-40% implied upside, good margin of safety",
+        "5-6": "Modestly below fair value, 15-25% implied upside, limited but real margin of safety",
+        "3-4": "Near fair value, 5-15% implied upside, minimal margin of safety",
+        "1-2": "At or above fair value, upside depends on multiple expansion that isn't well-supported",
+        "0": "Overvalued on all metrics"
+      },
+      "key_metrics": ["Forward P/E vs. sector average and own 5-year average", "EV/EBITDA vs. peers and history", "P/FCF", "DCF implied upside using conservative assumptions", "Distance from analyst consensus target"]
+    },
+    "balance_sheet": {
+      "weight": 0.20,
+      "description": "Can the company survive and fund itself through the downturn without diluting equity holders?",
+      "score_guide": {
+        "9-10": "Net cash position or near-zero net debt, investment grade credit, FCF strongly positive, can self-fund recovery",
+        "7-8": "Low leverage (Net Debt/EBITDA < 1.5x), strong FCF, no near-term debt maturities, investment grade",
+        "5-6": "Moderate leverage (1.5-2.5x), adequate FCF coverage, manageable maturities, investment grade or borderline",
+        "3-4": "Higher leverage (2.5-3.5x), tighter FCF, some debt maturity risk within 2 years, sub-IG possible",
+        "1-2": "Elevated leverage (3.5-4.5x), FCF barely covering interest, maturity wall risk, sub-investment grade",
+        "0": "Distressed balance sheet, refinancing risk, possible covenant breach"
+      },
+      "key_metrics": ["Net Debt / LTM EBITDA", "Interest Coverage Ratio", "Free Cash Flow Yield", "Debt maturity schedule", "Credit rating", "Available revolving credit facility"]
+    },
+    "catalyst": {
+      "weight": 0.20,
+      "description": "Are there specific, time-bound, identifiable events that could drive a re-rating?",
+      "score_guide": {
+        "9-10": "2+ high-probability catalysts with clear timelines within 12 months, any one of which would likely drive 15%+ move",
+        "7-8": "1-2 solid catalysts within 12-18 months, reasonable probability, meaningful price impact if hit",
+        "5-6": "Catalysts exist but are either slow-moving (multi-year), lower probability, or smaller magnitude",
+        "3-4": "Vague catalysts without specific triggers or timelines",
+        "1-2": "No clear near-term catalysts; thesis relies on long-term mean reversion only",
+        "0": "Negative catalyst risk dominates"
+      },
+      "key_metrics": ["Specific upcoming clinical trial readouts", "Earnings inflection points", "Regulatory decisions", "Management changes", "Buyback/dividend potential", "M&A likelihood", "Contract wins/renewals"]
+    },
+    "selloff_quality": {
+      "weight": 0.15,
+      "description": "Is this a high-quality selloff (company-specific, temporary, overreaction) or a low-quality one (structural, justified)?",
+      "score_guide": {
+        "9-10": "Classic overreaction — single event caused panic selling, fundamentals intact, market extrapolating worst case",
+        "7-8": "Clear company-specific issue that is largely fixable; some uncertainty remains but core franchise undamaged",
+        "5-6": "Mix of company-specific and structural issues; fixable but will take time and execution",
+        "3-4": "Significant structural headwinds alongside company issues; recovery possible but requires multiple things going right",
+        "1-2": "Primarily structural decline with temporary bounce potential",
+        "0": "Secular decline — the underlying business is being disrupted and won't recover"
+      },
+      "key_metrics": ["What specifically caused the selloff", "Selloff magnitude vs fundamental impairment", "Sell-side analyst stance", "Insider buying near lows", "Backlog/customer base intact", "Repeat offender or isolated"]
+    },
+    "industry_protection": {
+      "weight": 0.10,
+      "description": "How insulated is the core demand from macro deterioration?",
+      "score_guide": {
+        "9-10": "Demand completely inelastic to economic cycles — life-saving drugs, essential utilities, government-contracted defense",
+        "7-8": "Highly defensive — healthcare services/devices, consumer staples with strong brands, critical infrastructure",
+        "5-6": "Mostly defensive with some cyclical exposure — specialty industrials, B2B services with long contracts",
+        "3-4": "Mixed — some defensive demand but meaningful cyclical exposure",
+        "1-2": "Significant cyclical exposure; revenues meaningfully correlated with GDP / consumer health",
+        "0": "Highly cyclical; would be severely impacted by the bear macro scenario"
+      },
+      "key_metrics": ["Revenue correlation with GDP historically", "% of revenue from recurring/contracted sources", "Government/institutional vs. consumer end markets", "Pricing power in a downturn", "Historical performance in 2008-09 and 2020 recessions"]
+    },
+    "analyst_conviction": {
+      "weight": 0.10,
+      "description": "What does the smart money think, and how confident are they?",
+      "score_guide": {
+        "9-10": "Strong buy consensus (75%+ buys), low price target dispersion, recent upgrades from credible banks",
+        "7-8": "Majority buy-rated (55-75%), reasonable target dispersion, stable or improving analyst sentiment",
+        "5-6": "Mixed consensus (40-55% buys), moderate dispersion, some recent downgrades offset by holds",
+        "3-4": "Mostly hold-rated (30-40% buys), high target dispersion, recent downgrade cycle",
+        "1-2": "Weak consensus (< 30% buys), sell ratings present, active downgrade cycle ongoing",
+        "0": "Consensus sell, multiple high-profile downgrades, targets coming down sharply"
+      },
+      "key_metrics": ["% Buy / % Hold / % Sell ratings", "Recent rating changes (last 30-60 days)", "Target price standard deviation", "Implied upside in consensus target", "Commentary from JPM, GS, MS"]
+    }
+  },
+  "composite_score_interpretation": {
+    "8.0-10.0": {"label": "STRONG BUY", "action": "High conviction entry; 3-5% position size", "expected_return": "35-60% over 12-18 months"},
+    "6.5-7.9": {"label": "BUY", "action": "Solid entry; 2-3% position size", "expected_return": "20-35% over 12-18 months"},
+    "5.0-6.4": {"label": "SPECULATIVE BUY", "action": "Small position or watchlist; wait for more catalyst clarity", "expected_return": "10-20% over 12-18 months"},
+    "3.0-4.9": {"label": "HOLD / PASS", "action": "Do not initiate; revisit if price declines further", "expected_return": "Unclear risk/reward"},
+    "0-2.9": {"label": "AVOID", "action": "Does not fit strategy", "expected_return": "Negative expected value"}
+  }
+}
