@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "EL",
+    "date": "2025-06-30",
+    "stockPrice": 80.8,
+    "numberOfShares": 360100000,
+    "marketCapitalization": 29096080000,
+    "minusCashAndCashEquivalents": 2921000000,
+    "addTotalDebt": 9439000000,
+    "enterpriseValue": 35614080000
+  },
+  {
+    "symbol": "EL",
+    "date": "2024-06-30",
+    "stockPrice": 105.38,
+    "numberOfShares": 359000000,
+    "marketCapitalization": 37831420000,
+    "minusCashAndCashEquivalents": 3395000000,
+    "addTotalDebt": 9826000000,
+    "enterpriseValue": 44262420000
+  }
+]

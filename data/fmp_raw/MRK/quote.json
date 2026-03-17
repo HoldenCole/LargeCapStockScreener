@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "MRK",
+    "name": "Merck & Co., Inc.",
+    "price": 116.345,
+    "changePercentage": 0.79269,
+    "change": 0.915,
+    "volume": 3652567,
+    "dayLow": 114.38,
+    "dayHigh": 116.8,
+    "yearHigh": 125.14,
+    "yearLow": 73.31,
+    "marketCap": 287650447589,
+    "priceAvg50": 115.1058,
+    "priceAvg200": 93.8763,
+    "exchange": "NYSE",
+    "open": 115.78,
+    "previousClose": 115.43,
+    "timestamp": 1773771481
+  }
+]

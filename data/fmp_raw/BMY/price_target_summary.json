@@ -1,0 +1,14 @@
+[
+  {
+    "symbol": "BMY",
+    "lastMonthCount": 4,
+    "lastMonthAvgPriceTarget": 70,
+    "lastQuarterCount": 11,
+    "lastQuarterAvgPriceTarget": 63.91,
+    "lastYearCount": 20,
+    "lastYearAvgPriceTarget": 61.6,
+    "allTimeCount": 45,
+    "allTimeAvgPriceTarget": 65.11,
+    "publishers": "[\"StreetInsider\",\"TheFly\",\"Benzinga\",\"Pulse 2.0\",\"TipRanks Contributor\",\"TipRanks\"]"
+  }
+]

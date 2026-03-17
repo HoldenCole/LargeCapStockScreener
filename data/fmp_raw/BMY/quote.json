@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "BMY",
+    "name": "Bristol-Myers Squibb Company",
+    "price": 60.665,
+    "changePercentage": 1.5994,
+    "change": 0.955,
+    "volume": 5606179,
+    "dayLow": 59.75,
+    "dayHigh": 60.805,
+    "yearHigh": 62.89,
+    "yearLow": 42.52,
+    "marketCap": 123542677314,
+    "priceAvg50": 58.1932,
+    "priceAvg200": 50.1688,
+    "exchange": "NYSE",
+    "open": 60.13,
+    "previousClose": 59.71,
+    "timestamp": 1773771485
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "EL",
+    "name": "The Estée Lauder Companies Inc.",
+    "price": 89.9,
+    "changePercentage": 1.28436,
+    "change": 1.14,
+    "volume": 1254459,
+    "dayLow": 89.61,
+    "dayHigh": 91.99,
+    "yearHigh": 121.64,
+    "yearLow": 48.37,
+    "marketCap": 32458602579,
+    "priceAvg50": 107.7142,
+    "priceAvg200": 94.4522,
+    "exchange": "NYSE",
+    "open": 89.9,
+    "previousClose": 88.76,
+    "timestamp": 1773771490
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "RTX",
+    "date": "2025-12-31",
+    "stockPrice": 183.4,
+    "numberOfShares": 1341400000,
+    "marketCapitalization": 246012760000,
+    "minusCashAndCashEquivalents": 7435000000,
+    "addTotalDebt": 39506000000,
+    "enterpriseValue": 278083760000
+  },
+  {
+    "symbol": "RTX",
+    "date": "2024-12-31",
+    "stockPrice": 115.72,
+    "numberOfShares": 1332100000,
+    "marketCapitalization": 154150612000,
+    "minusCashAndCashEquivalents": 5578000000,
+    "addTotalDebt": 42893000000,
+    "enterpriseValue": 191465612000
+  }
+]

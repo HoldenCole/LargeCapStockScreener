@@ -1,0 +1,14 @@
+[
+  {
+    "symbol": "PFE",
+    "lastMonthCount": 4,
+    "lastMonthAvgPriceTarget": 26.75,
+    "lastQuarterCount": 7,
+    "lastQuarterAvgPriceTarget": 26.57,
+    "lastYearCount": 16,
+    "lastYearAvgPriceTarget": 27.63,
+    "allTimeCount": 57,
+    "allTimeAvgPriceTarget": 42.45,
+    "publishers": "[\"StreetInsider\",\"TheFly\",\"Benzinga\",\"Pulse 2.0\",\"Investing\",\"TipRanks Contributor\",\"Barrons\"]"
+  }
+]

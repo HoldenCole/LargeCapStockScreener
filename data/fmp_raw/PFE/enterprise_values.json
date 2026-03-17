@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "PFE",
+    "date": "2025-12-31",
+    "stockPrice": 24.9,
+    "numberOfShares": 5682759000,
+    "marketCapitalization": 141500699100,
+    "minusCashAndCashEquivalents": 1142000000,
+    "addTotalDebt": 67416000000,
+    "enterpriseValue": 207774699100
+  },
+  {
+    "symbol": "PFE",
+    "date": "2024-12-31",
+    "stockPrice": 26.53,
+    "numberOfShares": 5664000000,
+    "marketCapitalization": 150265920000,
+    "minusCashAndCashEquivalents": 1043000000,
+    "addTotalDebt": 66993000000,
+    "enterpriseValue": 216215920000
+  }
+]

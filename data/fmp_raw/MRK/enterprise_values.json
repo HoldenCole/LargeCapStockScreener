@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "MRK",
+    "date": "2025-12-31",
+    "stockPrice": 105.26,
+    "numberOfShares": 2507418000,
+    "marketCapitalization": 263930818680,
+    "minusCashAndCashEquivalents": 14565000000,
+    "addTotalDebt": 50534000000,
+    "enterpriseValue": 299899818680
+  },
+  {
+    "symbol": "MRK",
+    "date": "2024-12-31",
+    "stockPrice": 99.48,
+    "numberOfShares": 2532000000,
+    "marketCapitalization": 251883360000,
+    "minusCashAndCashEquivalents": 13242000000,
+    "addTotalDebt": 38270000000,
+    "enterpriseValue": 276911360000
+  }
+]

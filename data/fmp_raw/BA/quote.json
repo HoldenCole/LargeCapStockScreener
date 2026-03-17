@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "BA",
+    "name": "The Boeing Company",
+    "price": 210.87,
+    "changePercentage": -1.21797,
+    "change": -2.6,
+    "volume": 5385053,
+    "dayLow": 206.67,
+    "dayHigh": 217.15,
+    "yearHigh": 254.35,
+    "yearLow": 128.88,
+    "marketCap": 165606121890,
+    "priceAvg50": 234.2052,
+    "priceAvg200": 219.2618,
+    "exchange": "NYSE",
+    "open": 214.44,
+    "previousClose": 213.47,
+    "timestamp": 1773771491
+  }
+]

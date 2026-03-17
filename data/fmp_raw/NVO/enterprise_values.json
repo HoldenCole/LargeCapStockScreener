@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "NVO",
+    "date": "2025-12-31",
+    "stockPrice": 323.55,
+    "numberOfShares": 4447851000,
+    "marketCapitalization": 1439095359150,
+    "minusCashAndCashEquivalents": 26464000000,
+    "addTotalDebt": 130958000000,
+    "enterpriseValue": 1543589359150
+  },
+  {
+    "symbol": "NVO",
+    "date": "2024-12-31",
+    "stockPrice": 619.59,
+    "numberOfShares": 4453900000,
+    "marketCapitalization": 2759588146362,
+    "minusCashAndCashEquivalents": 15655000000,
+    "addTotalDebt": 102787000000,
+    "enterpriseValue": 2846720146362
+  }
+]

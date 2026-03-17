@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "RTX",
+    "name": "RTX Corporation",
+    "price": 203.23,
+    "changePercentage": -1.37339,
+    "change": -2.83,
+    "volume": 2235313,
+    "dayLow": 200.7133,
+    "dayHigh": 206.67,
+    "yearHigh": 214.5,
+    "yearLow": 112.27,
+    "marketCap": 272793596700,
+    "priceAvg50": 199.5034,
+    "priceAvg200": 170.7396,
+    "exchange": "NYSE",
+    "open": 206.29,
+    "previousClose": 206.06,
+    "timestamp": 1773771490
+  }
+]

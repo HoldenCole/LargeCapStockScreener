@@ -1,0 +1,22 @@
+[
+  {
+    "symbol": "BMY",
+    "date": "2025-12-31",
+    "stockPrice": 53.94,
+    "numberOfShares": 2041000000,
+    "marketCapitalization": 110091540000,
+    "minusCashAndCashEquivalents": 10209000000,
+    "addTotalDebt": 47139000000,
+    "enterpriseValue": 147021540000
+  },
+  {
+    "symbol": "BMY",
+    "date": "2024-12-31",
+    "stockPrice": 56.56,
+    "numberOfShares": 2027000000,
+    "marketCapitalization": 114647120000,
+    "minusCashAndCashEquivalents": 10346000000,
+    "addTotalDebt": 51200000000,
+    "enterpriseValue": 155501120000
+  }
+]

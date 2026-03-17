@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "PFE",
+    "name": "Pfizer Inc.",
+    "price": 27.4397,
+    "changePercentage": 3.118,
+    "change": 0.8297,
+    "volume": 25685505,
+    "dayLow": 26.815,
+    "dayHigh": 27.455,
+    "yearHigh": 27.94,
+    "yearLow": 20.92,
+    "marketCap": 156029472426,
+    "priceAvg50": 26.468,
+    "priceAvg200": 25.22115,
+    "exchange": "NYSE",
+    "open": 26.815,
+    "previousClose": 26.61,
+    "timestamp": 1773771486
+  }
+]

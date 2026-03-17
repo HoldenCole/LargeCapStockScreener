@@ -1,0 +1,14 @@
+[
+  {
+    "symbol": "MRK",
+    "lastMonthCount": 2,
+    "lastMonthAvgPriceTarget": 146,
+    "lastQuarterCount": 11,
+    "lastQuarterAvgPriceTarget": 132.45,
+    "lastYearCount": 20,
+    "lastYearAvgPriceTarget": 120.55,
+    "allTimeCount": 63,
+    "allTimeAvgPriceTarget": 115.71,
+    "publishers": "[\"StreetInsider\",\"TheFly\",\"Benzinga\",\"Pulse 2.0\",\"MarketWatch\",\"TipRanks\"]"
+  }
+]

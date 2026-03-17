@@ -1,0 +1,21 @@
+[
+  {
+    "symbol": "NVO",
+    "name": "Novo Nordisk A/S",
+    "price": 38.5299,
+    "changePercentage": -0.12986,
+    "change": -0.0501,
+    "volume": 9020217,
+    "dayLow": 38.38,
+    "dayHigh": 39.27,
+    "yearHigh": 82.57,
+    "yearLow": 35.85,
+    "marketCap": 171228475169,
+    "priceAvg50": 49.726,
+    "priceAvg200": 55.57925,
+    "exchange": "NYSE",
+    "open": 38.635,
+    "previousClose": 38.58,
+    "timestamp": 1773771482
+  }
+]
