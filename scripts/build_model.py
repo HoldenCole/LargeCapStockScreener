@@ -100,47 +100,19 @@ def style_data_cell(cell, value, is_formula=False, is_input=False, is_link=False
         cell.number_format = num_format
 
 
-def build_summary_dashboard(wb, data):
-    """Sheet 1: Summary Dashboard"""
-    ws = wb.create_sheet("SUMMARY DASHBOARD")
-    ws.sheet_view.showGridLines = False
+SECTOR_ORDER = ["Healthcare", "Defense / Aerospace", "Consumer Staples", "Industrials"]
+SECTOR_COLORS = {
+    "Healthcare": "2E75B6",
+    "Defense / Aerospace": "4472C4",
+    "Consumer Staples": "548235",
+    "Industrials": "BF8F00",
+}
 
-    # Title block
-    ws.merge_cells("A1:N1")
-    title_cell = ws["A1"]
-    title_cell.value = "EQUITY SCREENER — BEATEN-DOWN VALUE WITH UPSIDE"
-    title_cell.font = Font(name="Arial", bold=True, size=16, color=WHITE)
-    title_cell.fill = PatternFill("solid", fgColor=NAVY)
-    title_cell.alignment = Alignment(horizontal="center", vertical="center")
-    ws.row_dimensions[1].height = 45
 
-    ws.merge_cells("A2:N2")
-    sub_cell = ws["A2"]
-    sub_cell.value = (
-        f"Strategy: Contrarian Value | Macro: Bearish Credit & US Economy | "
-        f"Preferred Sectors: Healthcare · Defense · Staples · Industrials (LT Contracts) | "
-        f"As of: {datetime.today().strftime('%B %d, %Y')}"
-    )
-    sub_cell.font = Font(name="Arial", size=10, italic=True, color=DARK_GRAY)
-    sub_cell.alignment = Alignment(horizontal="center", vertical="center")
-    ws.row_dimensions[2].height = 20
-
-    ws.merge_cells("A3:N3")
-
-    # Master ranking table
-    headers = [
-        "Rank", "Ticker", "Company", "Price", "% Off High",
-        "Composite\nScore", "Recommendation",
-        "Target\nPrice", "Upside\n(%)", "Expected\nValue (%)",
-        "Key Risk", "Key Catalyst", "Industry", "Analyst\nConsensus"
-    ]
-    apply_header_row(ws, 4, headers, height=40)
-
-    stocks = data.get("stocks", [])
-    sorted_stocks = sorted(stocks, key=lambda x: x.get("composite_score", 0), reverse=True)
-
-    for i, s in enumerate(sorted_stocks):
-        row = 5 + i
+def _write_stock_ranking_rows(ws, stocks_list, start_row, show_sector=True):
+    """Write a ranked list of stocks into rows. Returns next available row."""
+    for i, s in enumerate(stocks_list):
+        row = start_row + i
         shade = (i % 2 == 1)
         score = s.get("composite_score", 0)
 
@@ -158,6 +130,7 @@ def build_summary_dashboard(wb, data):
             (i + 1,                               "#,##0",       False),
             (s.get("ticker", ""),                  "@",           True),
             (s.get("company", ""),                 "@",           False),
+            (s.get("sector", ""),                  "@",           False),
             (s.get("current_price", ""),           "$#,##0.00",   True),
             (s.get("pct_off_high", ""),            "0.0%",        True),
             (score,                                "0.0",         False),
@@ -167,13 +140,12 @@ def build_summary_dashboard(wb, data):
             (s.get("expected_value_pct", ""),      "0.0%",        False),
             (s.get("key_risk", ""),                "@",           False),
             (s.get("key_catalyst", ""),            "@",           False),
-            (s.get("industry", ""),                "@",           False),
             (s.get("analyst_consensus", ""),       "@",           False),
         ]
 
         for col_idx, (val, fmt, is_inp) in enumerate(row_data, 1):
             cell = ws.cell(row=row, column=col_idx, value=val)
-            if col_idx == 7:
+            if col_idx == 8:  # Recommendation column
                 cell.font = rec_font
                 cell.fill = rec_fill
                 cell.border = make_border()
@@ -183,9 +155,67 @@ def build_summary_dashboard(wb, data):
                 style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
         ws.row_dimensions[row].height = 20
 
+    return start_row + len(stocks_list)
+
+
+def build_summary_dashboard(wb, data):
+    """Sheet 1: Summary Dashboard — Master ranking + per-sector top 5."""
+    ws = wb.create_sheet("SUMMARY DASHBOARD")
+    ws.sheet_view.showGridLines = False
+
+    num_cols = 14
+    last_col = get_column_letter(num_cols)
+
+    # Title block
+    ws.merge_cells(f"A1:{last_col}1")
+    title_cell = ws["A1"]
+    title_cell.value = "EQUITY SCREENER — BEATEN-DOWN VALUE WITH UPSIDE"
+    title_cell.font = Font(name="Arial", bold=True, size=16, color=WHITE)
+    title_cell.fill = PatternFill("solid", fgColor=NAVY)
+    title_cell.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 45
+
+    ws.merge_cells(f"A2:{last_col}2")
+    sub_cell = ws["A2"]
+    sub_cell.value = (
+        f"Strategy: Contrarian Value | Macro: Bearish Credit & US Economy | "
+        f"Sectors: Healthcare · Defense / Aerospace · Consumer Staples · Industrials | "
+        f"Top 5 per Sector | As of: {datetime.today().strftime('%B %d, %Y')}"
+    )
+    sub_cell.font = Font(name="Arial", size=10, italic=True, color=DARK_GRAY)
+    sub_cell.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[2].height = 20
+
+    ws.merge_cells(f"A3:{last_col}3")
+
+    # ── MASTER CROSS-SECTOR RANKING ──────────────────────────────────────────
+    master_title_row = 4
+    ws.merge_cells(f"A{master_title_row}:{last_col}{master_title_row}")
+    mt = ws.cell(row=master_title_row, column=1,
+                 value="MASTER RANKING — ALL SECTORS (sorted by Composite Score)")
+    mt.font = Font(name="Arial", bold=True, size=12, color=WHITE)
+    mt.fill = PatternFill("solid", fgColor=NAVY)
+    mt.alignment = Alignment(horizontal="left", vertical="center")
+    ws.row_dimensions[master_title_row].height = 28
+
+    headers = [
+        "Rank", "Ticker", "Company", "Sector", "Price", "% Off High",
+        "Composite\nScore", "Recommendation",
+        "Target\nPrice", "Upside\n(%)", "Expected\nValue (%)",
+        "Key Risk", "Key Catalyst", "Analyst\nConsensus"
+    ]
+    header_row = master_title_row + 1
+    apply_header_row(ws, header_row, headers, height=40)
+
+    stocks = data.get("stocks", [])
+    sorted_stocks = sorted(stocks, key=lambda x: x.get("composite_score", 0), reverse=True)
+
+    data_start = header_row + 1
+    next_row = _write_stock_ranking_rows(ws, sorted_stocks, data_start)
+
     # Portfolio construction note
-    note_row = 5 + len(sorted_stocks) + 2
-    ws.merge_cells(f"A{note_row}:N{note_row}")
+    note_row = next_row + 1
+    ws.merge_cells(f"A{note_row}:{last_col}{note_row}")
     note = ws.cell(row=note_row, column=1)
     note.value = (
         "PORTFOLIO CONSTRUCTION GUIDANCE  |  Strong Buy (>=7.5): 3-5% position  |  "
@@ -199,43 +229,71 @@ def build_summary_dashboard(wb, data):
     note.border = make_border()
     ws.row_dimensions[note_row].height = 30
 
-    # Screened-out table
+    # ── PER-SECTOR TOP 5 TABLES ──────────────────────────────────────────────
+    current_row = note_row + 3
+    for sector in SECTOR_ORDER:
+        sector_stocks = [s for s in stocks if s.get("sector", "") == sector]
+        sector_sorted = sorted(sector_stocks, key=lambda x: x.get("composite_score", 0), reverse=True)[:5]
+        if not sector_sorted:
+            continue
+
+        sector_color = SECTOR_COLORS.get(sector, ACCENT_BLUE)
+
+        # Sector header
+        ws.merge_cells(f"A{current_row}:{last_col}{current_row}")
+        sec_cell = ws.cell(row=current_row, column=1,
+                           value=f"TOP 5 — {sector.upper()}")
+        sec_cell.font = Font(name="Arial", bold=True, size=12, color=WHITE)
+        sec_cell.fill = PatternFill("solid", fgColor=sector_color)
+        sec_cell.alignment = Alignment(horizontal="left", vertical="center")
+        ws.row_dimensions[current_row].height = 28
+        current_row += 1
+
+        apply_header_row(ws, current_row, headers, height=35, bg=sector_color)
+        current_row += 1
+
+        current_row = _write_stock_ranking_rows(ws, sector_sorted, current_row)
+        current_row += 2  # gap between sectors
+
+    # ── SCREENED-OUT TABLE ────────────────────────────────────────────────────
     screened_out = data.get("screened_out", [])
     if screened_out:
-        so_row = note_row + 3
-        ws.merge_cells(f"A{so_row}:E{so_row}")
+        so_row = current_row + 1
+        ws.merge_cells(f"A{so_row}:F{so_row}")
         header = ws.cell(row=so_row, column=1, value="SCREENED OUT — DID NOT PASS HARD FILTERS")
         header.font = Font(name="Arial", bold=True, size=11, color=WHITE)
         header.fill = PatternFill("solid", fgColor=DARK_GRAY)
         header.alignment = Alignment(horizontal="left", vertical="center")
         ws.row_dimensions[so_row].height = 22
 
-        apply_header_row(ws, so_row + 1, ["Ticker", "Company", "Filter Failed", "Reason", "Revisit If"], bg=MID_GRAY, text_color="000000")
+        apply_header_row(ws, so_row + 1,
+                         ["Ticker", "Company", "Sector", "Filter Failed", "Reason", "Revisit If"],
+                         bg=MID_GRAY, text_color="000000")
         for j, so in enumerate(screened_out):
             r = so_row + 2 + j
             for k, val in enumerate([
                 so.get("ticker", ""), so.get("company", ""),
-                so.get("filter_failed", ""), so.get("reason", ""),
-                so.get("revisit_if", "")
+                so.get("sector", ""), so.get("filter_failed", ""),
+                so.get("reason", ""), so.get("revisit_if", "")
             ], 1):
                 cell = ws.cell(row=r, column=k, value=val)
                 style_data_cell(cell, val, row_shade=(j % 2 == 1))
 
     # Column widths
-    col_widths = [6, 8, 28, 10, 10, 10, 18, 10, 8, 10, 35, 35, 20, 14]
+    col_widths = [6, 8, 28, 22, 10, 10, 10, 18, 10, 8, 10, 35, 35, 14]
     for ci, w in enumerate(col_widths, 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
-    ws.freeze_panes = "A5"
+    ws.freeze_panes = f"A{data_start}"
     return ws
 
 
 def build_stock_scores(wb, data):
-    """Sheet 2: Full scoring matrix"""
+    """Sheet 2: Full scoring matrix — grouped by sector."""
     ws = wb.create_sheet("STOCK SCORES")
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells("A1:I1")
+    ws.merge_cells("A1:J1")
     title = ws["A1"]
     title.value = "COMPOSITE SCORING MATRIX"
     title.font = Font(name="Arial", bold=True, size=14, color=WHITE)
@@ -252,11 +310,11 @@ def build_stock_scores(wb, data):
         ("Analyst Conviction", 0.10),
     ]
 
-    weight_headers = ["Ticker"] + [f"{c[0]}\n(w={c[1]:.0%})" for c in criteria] + ["Composite\nScore", "Rec."]
+    weight_headers = ["Ticker", "Sector"] + [f"{c[0]}\n(w={c[1]:.0%})" for c in criteria] + ["Composite\nScore", "Rec."]
     apply_header_row(ws, 2, weight_headers, height=40)
 
     # Note row
-    ws.merge_cells("A3:I3")
+    ws.merge_cells("A3:J3")
     note = ws["A3"]
     note.value = (
         "Scores: 0-10 per criterion  |  Blue = Hardcoded inputs  |  "
@@ -267,55 +325,78 @@ def build_stock_scores(wb, data):
     note.alignment = Alignment(horizontal="left", vertical="center")
 
     stocks = data.get("stocks", [])
-    for i, s in enumerate(stocks):
-        row = 4 + i * 4
-        shade = (i % 2 == 1)
-        scores = s.get("scores", {})
+    current_row = 4
+    for sector in SECTOR_ORDER:
+        sector_stocks = [s for s in stocks if s.get("sector", "") == sector]
+        sector_sorted = sorted(sector_stocks, key=lambda x: x.get("composite_score", 0), reverse=True)
+        if not sector_sorted:
+            continue
 
-        # Score row
-        ws.cell(row=row, column=1, value=s.get("ticker", "")).font = Font(name="Arial", bold=True, size=11)
-        for j, (crit_name, weight) in enumerate(criteria):
-            score_val = scores.get(crit_name.lower().replace(" ", "_"), {}).get("score", "")
-            cell = ws.cell(row=row, column=2 + j, value=score_val)
-            style_data_cell(cell, score_val, is_input=True, num_format="0.0", row_shade=shade)
+        # Sector divider row
+        sector_color = SECTOR_COLORS.get(sector, ACCENT_BLUE)
+        ws.merge_cells(f"A{current_row}:J{current_row}")
+        sec_cell = ws.cell(row=current_row, column=1, value=sector.upper())
+        sec_cell.font = Font(name="Arial", bold=True, size=11, color=WHITE)
+        sec_cell.fill = PatternFill("solid", fgColor=sector_color)
+        sec_cell.alignment = Alignment(horizontal="left", vertical="center")
+        ws.row_dimensions[current_row].height = 24
+        current_row += 1
 
-        # Composite formula
-        weights = [c[1] for c in criteria]
-        formula_parts = [f"B{row}*{weights[0]}", f"C{row}*{weights[1]}", f"D{row}*{weights[2]}",
-                         f"E{row}*{weights[3]}", f"F{row}*{weights[4]}", f"G{row}*{weights[5]}"]
-        composite_cell = ws.cell(row=row, column=8)
-        composite_cell.value = "=" + "+".join(formula_parts)
-        composite_cell.font = Font(name="Arial", size=11, bold=True, color=BLACK_FORMULA)
-        composite_cell.number_format = "0.0"
-        composite_cell.alignment = Alignment(horizontal="center", vertical="center")
-        composite_cell.border = make_border()
+        for i, s in enumerate(sector_sorted):
+            row = current_row
+            shade = (i % 2 == 1)
+            scores = s.get("scores", {})
 
-        # Recommendation formula
-        rec_cell = ws.cell(row=row, column=9)
-        rec_cell.value = (
-            f'=IF(H{row}>=7.5,"STRONG BUY",IF(H{row}>=6.5,"BUY",'
-            f'IF(H{row}>=5,"SPECULATIVE BUY","PASS")))'
-        )
-        rec_cell.font = Font(name="Arial", size=10, color=BLACK_FORMULA, bold=True)
-        rec_cell.alignment = Alignment(horizontal="center", vertical="center")
-        rec_cell.border = make_border()
+            # Ticker + Sector
+            ws.cell(row=row, column=1, value=s.get("ticker", "")).font = Font(name="Arial", bold=True, size=11)
+            ws.cell(row=row, column=2, value=s.get("sector", "")).font = Font(name="Arial", size=9, color=DARK_GRAY)
 
-        # Justification row
-        just_row = row + 1
-        ws.cell(row=just_row, column=1, value="Rationale:").font = Font(name="Arial", italic=True, size=9, color=DARK_GRAY)
-        justifications = scores.get("justifications", {})
-        for j, (crit_name, _) in enumerate(criteria):
-            just_text = justifications.get(crit_name.lower().replace(" ", "_"), "")
-            cell = ws.cell(row=just_row, column=2 + j, value=just_text)
-            cell.font = Font(name="Arial", italic=True, size=8, color=DARK_GRAY)
-            cell.alignment = Alignment(wrap_text=True, vertical="top", horizontal="left")
-        ws.row_dimensions[just_row].height = 42
+            for j, (crit_name, weight) in enumerate(criteria):
+                score_val = scores.get(crit_name.lower().replace(" ", "_"), {}).get("score", "")
+                cell = ws.cell(row=row, column=3 + j, value=score_val)
+                style_data_cell(cell, score_val, is_input=True, num_format="0.0", row_shade=shade)
+
+            # Composite formula (columns C-H are scores, I is composite)
+            weights = [c[1] for c in criteria]
+            formula_parts = [f"C{row}*{weights[0]}", f"D{row}*{weights[1]}", f"E{row}*{weights[2]}",
+                             f"F{row}*{weights[3]}", f"G{row}*{weights[4]}", f"H{row}*{weights[5]}"]
+            composite_cell = ws.cell(row=row, column=9)
+            composite_cell.value = "=" + "+".join(formula_parts)
+            composite_cell.font = Font(name="Arial", size=11, bold=True, color=BLACK_FORMULA)
+            composite_cell.number_format = "0.0"
+            composite_cell.alignment = Alignment(horizontal="center", vertical="center")
+            composite_cell.border = make_border()
+
+            # Recommendation formula
+            rec_cell = ws.cell(row=row, column=10)
+            rec_cell.value = (
+                f'=IF(I{row}>=7.5,"STRONG BUY",IF(I{row}>=6.5,"BUY",'
+                f'IF(I{row}>=5,"SPECULATIVE BUY","PASS")))'
+            )
+            rec_cell.font = Font(name="Arial", size=10, color=BLACK_FORMULA, bold=True)
+            rec_cell.alignment = Alignment(horizontal="center", vertical="center")
+            rec_cell.border = make_border()
+            current_row += 1
+
+            # Justification row
+            ws.cell(row=current_row, column=1, value="Rationale:").font = Font(name="Arial", italic=True, size=9, color=DARK_GRAY)
+            justifications = scores.get("justifications", {})
+            for j, (crit_name, _) in enumerate(criteria):
+                just_text = justifications.get(crit_name.lower().replace(" ", "_"), "")
+                cell = ws.cell(row=current_row, column=3 + j, value=just_text)
+                cell.font = Font(name="Arial", italic=True, size=8, color=DARK_GRAY)
+                cell.alignment = Alignment(wrap_text=True, vertical="top", horizontal="left")
+            ws.row_dimensions[current_row].height = 42
+            current_row += 1
+
+        current_row += 1  # gap between sectors
 
     ws.column_dimensions["A"].width = 10
-    for col in ["B", "C", "D", "E", "F", "G"]:
+    ws.column_dimensions["B"].width = 20
+    for col in ["C", "D", "E", "F", "G", "H"]:
         ws.column_dimensions[col].width = 16
-    ws.column_dimensions["H"].width = 12
-    ws.column_dimensions["I"].width = 16
+    ws.column_dimensions["I"].width = 12
+    ws.column_dimensions["J"].width = 16
 
     ws.freeze_panes = "A4"
     return ws
@@ -326,7 +407,7 @@ def build_valuation_comps(wb, data):
     ws = wb.create_sheet("VALUATION COMPS")
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells("A1:P1")
+    ws.merge_cells("A1:Q1")
     t = ws["A1"]
     t.value = "VALUATION ANALYSIS & COMPARABLE COMPANIES"
     t.font = Font(name="Arial", bold=True, size=14, color=WHITE)
@@ -335,7 +416,7 @@ def build_valuation_comps(wb, data):
     ws.row_dimensions[1].height = 36
 
     headers = [
-        "Ticker", "Price",
+        "Ticker", "Sector", "Price",
         "Fwd P/E", "Sector Avg P/E", "5-Yr Hist P/E", "P/E vs. Hist (%)",
         "EV/EBITDA", "Peer Avg EV/EBITDA", "EV/EBITDA vs. Peers (%)",
         "P/FCF", "EV/Sales",
@@ -352,21 +433,22 @@ def build_valuation_comps(wb, data):
 
         row_vals = [
             (s.get("ticker", ""),                  "@",           True),
+            (s.get("sector", ""),                   "@",           False),
             (s.get("current_price", ""),            "$#,##0.00",   True),
             (v.get("fwd_pe", ""),                   "0.0x",        True),
             (v.get("sector_avg_pe", ""),            "0.0x",        True),
             (v.get("hist_5yr_pe", ""),              "0.0x",        True),
-            (f"=(C{row}-E{row})/E{row}",           "0.0%",        False),
+            (f"=(D{row}-F{row})/F{row}",           "0.0%",        False),
             (v.get("ev_ebitda", ""),                "0.0x",        True),
             (v.get("peer_avg_ev_ebitda", ""),       "0.0x",        True),
-            (f"=(G{row}-H{row})/H{row}",           "0.0%",        False),
+            (f"=(H{row}-I{row})/I{row}",           "0.0%",        False),
             (v.get("p_fcf", ""),                    "0.0x",        True),
             (v.get("ev_sales", ""),                 "0.0x",        True),
             (v.get("bear_target", ""),              "$#,##0.00",   True),
             (v.get("base_target", ""),              "$#,##0.00",   True),
             (v.get("bull_target", ""),              "$#,##0.00",   True),
             (v.get("analyst_avg_target", ""),       "$#,##0.00",   True),
-            (f"=(O{row}-B{row})/B{row}",           "0.0%",        False),
+            (f"=(P{row}-C{row})/C{row}",           "0.0%",        False),
         ]
 
         for col_idx, (val, fmt, is_inp) in enumerate(row_vals, 1):
@@ -374,7 +456,7 @@ def build_valuation_comps(wb, data):
             style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
         ws.row_dimensions[row].height = 18
 
-    for ci, w in enumerate([10, 10, 8, 12, 12, 12, 10, 14, 14, 8, 8, 10, 10, 10, 14, 12], 1):
+    for ci, w in enumerate([10, 20, 10, 8, 12, 12, 12, 10, 14, 14, 8, 8, 10, 10, 10, 14, 12], 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
     ws.freeze_panes = "A3"
@@ -386,7 +468,7 @@ def build_fundamental_data(wb, data):
     ws = wb.create_sheet("FUNDAMENTAL DATA")
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells("A1:S1")
+    ws.merge_cells("A1:T1")
     t = ws["A1"]
     t.value = "FUNDAMENTAL DATA — INCOME STATEMENT, BALANCE SHEET & CASH FLOW SUMMARY"
     t.font = Font(name="Arial", bold=True, size=14, color=WHITE)
@@ -395,7 +477,7 @@ def build_fundamental_data(wb, data):
     ws.row_dimensions[1].height = 36
 
     headers = [
-        "Ticker", "Company", "Mkt Cap ($B)", "EV ($B)",
+        "Ticker", "Company", "Sector", "Mkt Cap ($B)", "EV ($B)",
         "Rev LTM ($B)", "Rev NTM ($B)", "Rev Growth (%)",
         "EBITDA Mgn (%)", "EPS LTM", "EPS NTM", "EPS 3Y CAGR (%)",
         "Net Cash/(Debt) ($B)", "ND/EBITDA", "Interest Cov.", "Credit Rating",
@@ -415,11 +497,12 @@ def build_fundamental_data(wb, data):
         row_vals = [
             (s.get("ticker", ""),                  "@",                              True),
             (s.get("company", ""),                  "@",                              False),
+            (s.get("sector", ""),                   "@",                              False),
             (f.get("market_cap_b", ""),             "$#,##0.0",                       True),
             (f.get("ev_b", ""),                     "$#,##0.0",                       True),
             (f.get("rev_ltm_b", ""),                "$#,##0.0",                       True),
             (f.get("rev_ntm_b", ""),                "$#,##0.0",                       True),
-            (f"=(F{row}-E{row})/E{row}",            "0.0%",                           False),
+            (f"=(G{row}-F{row})/F{row}",            "0.0%",                           False),
             (f.get("ebitda_margin", ""),             "0.0%",                           True),
             (f.get("eps_ltm", ""),                   "$#,##0.00",                      True),
             (f.get("eps_ntm", ""),                   "$#,##0.00",                      True),
@@ -429,7 +512,7 @@ def build_fundamental_data(wb, data):
             (bs.get("interest_coverage", ""),         "0.0x",                           True),
             (bs.get("credit_rating", ""),             "@",                              True),
             (cf.get("fcf_ltm_b", ""),                "$#,##0.0",                       True),
-            (f"=P{row}/C{row}",                      "0.0%",                           False),
+            (f"=Q{row}/D{row}",                      "0.0%",                           False),
             (cf.get("capex_rev_pct", ""),             "0.0%",                           True),
             (f.get("div_yield", ""),                  "0.0%",                           True),
         ]
@@ -439,7 +522,7 @@ def build_fundamental_data(wb, data):
             style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
         ws.row_dimensions[row].height = 18
 
-    for ci, w in enumerate([10, 28, 10, 8, 10, 10, 10, 10, 8, 8, 10, 14, 10, 10, 10, 10, 10, 10, 10], 1):
+    for ci, w in enumerate([10, 28, 20, 10, 8, 10, 10, 10, 10, 8, 8, 10, 14, 10, 10, 10, 10, 10, 10, 10], 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
     ws.freeze_panes = "A3"
