@@ -8,7 +8,7 @@ Since openpyxl doesn't evaluate formulas, this script:
 2. Identifies all formula cells
 3. Reports formula count per sheet
 4. Checks for common formula errors (#REF!, #DIV/0!, #N/A, #VALUE!, #NAME?)
-5. Validates all 8 required sheets are present
+5. Validates all 9 required sheets are present
 
 Usage:
     python scripts/recalc.py output/stock_screener.xlsx
@@ -28,6 +28,7 @@ REQUIRED_SHEETS = [
     "RISK MATRIX",
     "NVO DEEP DIVE",
     "ASSUMPTIONS",
+    "SCREENER LOGIC",
 ]
 
 ERROR_PATTERNS = ["#REF!", "#DIV/0!", "#N/A", "#VALUE!", "#NAME?", "#NULL!", "#NUM!"]
@@ -98,12 +99,12 @@ def recalc(filepath):
     checks_passed = 0
     checks_total = 0
 
-    # Check 1: STOCK SCORES has composite formula
+    # Check 1: STOCK SCORES has composite formula (column J=10 in 7-criteria layout)
     if "STOCK SCORES" in wb.sheetnames:
         ws = wb["STOCK SCORES"]
         checks_total += 1
         has_composite = False
-        for row in ws.iter_rows(min_col=8, max_col=8):
+        for row in ws.iter_rows(min_col=10, max_col=10):
             for cell in row:
                 if cell.value and isinstance(cell.value, str) and cell.value.startswith("="):
                     has_composite = True
@@ -114,12 +115,12 @@ def recalc(filepath):
         else:
             print("  [WARN] STOCK SCORES may be missing composite score formulas")
 
-    # Check 2: VALUATION COMPS has implied upside formula
+    # Check 2: VALUATION COMPS has implied upside formula (column Q=17)
     if "VALUATION COMPS" in wb.sheetnames:
         ws = wb["VALUATION COMPS"]
         checks_total += 1
         has_upside = False
-        for row in ws.iter_rows(min_col=16, max_col=16):
+        for row in ws.iter_rows(min_col=17, max_col=17):
             for cell in row:
                 if cell.value and isinstance(cell.value, str) and cell.value.startswith("="):
                     has_upside = True
@@ -130,12 +131,12 @@ def recalc(filepath):
         else:
             print("  [WARN] VALUATION COMPS may be missing implied upside formulas")
 
-    # Check 3: FUNDAMENTAL DATA has revenue growth formula
+    # Check 3: FUNDAMENTAL DATA has revenue growth formula (column H=8)
     if "FUNDAMENTAL DATA" in wb.sheetnames:
         ws = wb["FUNDAMENTAL DATA"]
         checks_total += 1
         has_growth = False
-        for row in ws.iter_rows(min_col=7, max_col=7):
+        for row in ws.iter_rows(min_col=8, max_col=8):
             for cell in row:
                 if cell.value and isinstance(cell.value, str) and cell.value.startswith("="):
                     has_growth = True
@@ -162,12 +163,12 @@ def recalc(filepath):
         else:
             print("  [WARN] CATALYST TRACKER may be missing expected impact formulas")
 
-    # Check 5: STOCK SCORES has recommendation IF formula
+    # Check 5: STOCK SCORES has recommendation IF formula (column K=11 in 7-criteria layout)
     if "STOCK SCORES" in wb.sheetnames:
         ws = wb["STOCK SCORES"]
         checks_total += 1
         has_if = False
-        for row in ws.iter_rows(min_col=9, max_col=9):
+        for row in ws.iter_rows(min_col=11, max_col=11):
             for cell in row:
                 if cell.value and isinstance(cell.value, str) and "IF(" in cell.value.upper():
                     has_if = True

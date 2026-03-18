@@ -3,10 +3,6 @@ build_model.py
 ==============
 Main script for building the institutional stock screener Excel model.
 
-Claude Code: After completing your web research and populating research_data.json,
-run this script to build the Excel model. The script uses openpyxl for formatting
-and formula construction. Follow the XLSX skill standards throughout.
-
 Usage:
     python scripts/build_model.py
 
@@ -44,6 +40,30 @@ GREEN_TEXT = "375623"
 YELLOW_TEXT = "9C6500"
 RED_TEXT = "9C0006"
 ACCENT_BLUE = "2E75B6"
+
+# ── Sector colors (pastel, for ticker column background) ─────────────────────
+SECTOR_COLORS = {
+    "Healthcare": "BDD7EE",
+    "Defense / Aerospace": "E2EFDA",
+    "Consumer Staples": "FFF2CC",
+    "Industrials": "FCE4D6",
+    "Utilities": "EDEDED",
+    "International": "E2D9F3",
+}
+
+SECTOR_HEADER_COLORS = {
+    "Healthcare": "2E75B6",
+    "Defense / Aerospace": "548235",
+    "Consumer Staples": "BF8F00",
+    "Industrials": "C55A11",
+    "Utilities": "595959",
+    "International": "7030A0",
+}
+
+SECTOR_ORDER = [
+    "Healthcare", "Defense / Aerospace", "Consumer Staples",
+    "Industrials", "Utilities", "International",
+]
 
 
 def load_research_data():
@@ -100,21 +120,27 @@ def style_data_cell(cell, value, is_formula=False, is_input=False, is_link=False
         cell.number_format = num_format
 
 
-SECTOR_ORDER = ["Healthcare", "Defense / Aerospace", "Consumer Staples", "Industrials"]
-SECTOR_COLORS = {
-    "Healthcare": "2E75B6",
-    "Defense / Aerospace": "4472C4",
-    "Consumer Staples": "548235",
-    "Industrials": "BF8F00",
-}
+def _apply_sector_color_to_ticker(cell, sector):
+    """Apply pastel sector color as background fill to a ticker cell."""
+    color = SECTOR_COLORS.get(sector, "FFFFFF")
+    cell.fill = PatternFill("solid", fgColor=color)
 
 
-def _write_stock_ranking_rows(ws, stocks_list, start_row, show_sector=True):
+def _apply_disqualified_style(ws, row, num_cols):
+    """Apply red background + strikethrough text for DISQUALIFIED rows."""
+    for col in range(1, num_cols + 1):
+        cell = ws.cell(row=row, column=col)
+        cell.font = Font(name="Arial", size=10, color=RED_TEXT, bold=False, strike=True)
+        cell.fill = PatternFill("solid", fgColor=RED_BG)
+
+
+def _write_stock_ranking_rows(ws, stocks_list, start_row, num_cols=17):
     """Write a ranked list of stocks into rows. Returns next available row."""
     for i, s in enumerate(stocks_list):
         row = start_row + i
         shade = (i % 2 == 1)
         score = s.get("composite_score", 0)
+        is_disqualified = s.get("disqualifier_reason") is not None
 
         if score >= 7.5:
             rec_fill = PatternFill("solid", fgColor=GREEN_BG)
@@ -126,21 +152,27 @@ def _write_stock_ranking_rows(ws, stocks_list, start_row, show_sector=True):
             rec_fill = PatternFill("solid", fgColor=RED_BG)
             rec_font = Font(name="Arial", size=10, color=RED_TEXT, bold=True)
 
+        criminal_flag = s.get("criminal_flag", False)
+        criminal_text = "Y" if criminal_flag else "N"
+
         row_data = [
-            (i + 1,                               "#,##0",       False),
-            (s.get("ticker", ""),                  "@",           True),
-            (s.get("company", ""),                 "@",           False),
-            (s.get("sector", ""),                  "@",           False),
-            (s.get("current_price", ""),           "$#,##0.00",   True),
-            (s.get("pct_off_high", ""),            "0.0%",        True),
-            (score,                                "0.0",         False),
-            (s.get("recommendation", ""),          "@",           False),
-            (s.get("target_price", ""),            "$#,##0.00",   True),
-            (s.get("implied_upside", ""),          "0.0%",        False),
-            (s.get("expected_value_pct", ""),      "0.0%",        False),
-            (s.get("key_risk", ""),                "@",           False),
-            (s.get("key_catalyst", ""),            "@",           False),
-            (s.get("analyst_consensus", ""),       "@",           False),
+            (i + 1,                                          "#,##0",       False),
+            (s.get("ticker", ""),                             "@",           True),
+            (s.get("company", ""),                            "@",           False),
+            (s.get("sector", ""),                             "@",           False),
+            (s.get("current_price", ""),                      "$#,##0.00",   True),
+            (s.get("pct_off_high", ""),                       "0.0%",        True),
+            (score,                                           "0.0",         False),
+            (s.get("recommendation", ""),                     "@",           False),
+            (s.get("target_price", ""),                       "$#,##0.00",   True),
+            (s.get("implied_upside", ""),                     "0.0%",        False),
+            (s.get("expected_value_pct", ""),                 "0.0%",        False),
+            (s.get("key_risk", ""),                           "@",           False),
+            (s.get("key_catalyst", ""),                       "@",           False),
+            (s.get("analyst_consensus", ""),                  "@",           False),
+            (s.get("catalyst_name", "") + " — " + s.get("catalyst_date", ""), "@", False),
+            (s.get("selloff_type", ""),                       "@",           False),
+            (criminal_text,                                   "@",           False),
         ]
 
         for col_idx, (val, fmt, is_inp) in enumerate(row_data, 1):
@@ -153,17 +185,25 @@ def _write_stock_ranking_rows(ws, stocks_list, start_row, show_sector=True):
                 cell.number_format = "@"
             else:
                 style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
+
+        # Apply sector color to ticker cell (col 2)
+        _apply_sector_color_to_ticker(ws.cell(row=row, column=2), s.get("sector", ""))
+
+        # Apply DISQUALIFIED styling if applicable
+        if is_disqualified:
+            _apply_disqualified_style(ws, row, num_cols)
+
         ws.row_dimensions[row].height = 20
 
     return start_row + len(stocks_list)
 
 
 def build_summary_dashboard(wb, data):
-    """Sheet 1: Summary Dashboard — Master ranking + per-sector top 5."""
+    """Sheet 1: Summary Dashboard — Master ranking + per-sector top 5 + screened out."""
     ws = wb.create_sheet("SUMMARY DASHBOARD")
     ws.sheet_view.showGridLines = False
 
-    num_cols = 14
+    num_cols = 17
     last_col = get_column_letter(num_cols)
 
     # Title block
@@ -177,9 +217,10 @@ def build_summary_dashboard(wb, data):
 
     ws.merge_cells(f"A2:{last_col}2")
     sub_cell = ws["A2"]
+    sectors_present = sorted(set(s.get("sector", "") for s in data.get("stocks", [])))
     sub_cell.value = (
         f"Strategy: Contrarian Value | Macro: Bearish Credit & US Economy | "
-        f"Sectors: Healthcare · Defense / Aerospace · Consumer Staples · Industrials | "
+        f"Sectors: {' · '.join(sectors_present)} | "
         f"Top 5 per Sector | As of: {datetime.today().strftime('%B %d, %Y')}"
     )
     sub_cell.font = Font(name="Arial", size=10, italic=True, color=DARK_GRAY)
@@ -202,7 +243,8 @@ def build_summary_dashboard(wb, data):
         "Rank", "Ticker", "Company", "Sector", "Price", "% Off High",
         "Composite\nScore", "Recommendation",
         "Target\nPrice", "Upside\n(%)", "Expected\nValue (%)",
-        "Key Risk", "Key Catalyst", "Analyst\nConsensus"
+        "Key Risk", "Key Catalyst", "Analyst\nConsensus",
+        "Catalyst Name\n& Date", "Selloff\nType", "Criminal/\nReg Flag"
     ]
     header_row = master_title_row + 1
     apply_header_row(ws, header_row, headers, height=40)
@@ -211,15 +253,15 @@ def build_summary_dashboard(wb, data):
     sorted_stocks = sorted(stocks, key=lambda x: x.get("composite_score", 0), reverse=True)
 
     data_start = header_row + 1
-    next_row = _write_stock_ranking_rows(ws, sorted_stocks, data_start)
+    next_row = _write_stock_ranking_rows(ws, sorted_stocks, data_start, num_cols)
 
     # Portfolio construction note
     note_row = next_row + 1
     ws.merge_cells(f"A{note_row}:{last_col}{note_row}")
     note = ws.cell(row=note_row, column=1)
     note.value = (
-        "PORTFOLIO CONSTRUCTION GUIDANCE  |  Strong Buy (>=7.5): 3-5% position  |  "
-        "Buy (6.5-7.4): 2-3% position  |  Speculative (5.0-6.4): 1% or watchlist only  |  "
+        "PORTFOLIO CONSTRUCTION GUIDANCE  |  Strong Buy (>=8.0): 3-5% position  |  "
+        "Buy (6.5-7.9): 2-3% position  |  Speculative (5.0-6.4): 1% or watchlist only  |  "
         "Max single position: 5%  |  Total strategy exposure: 15-25% of portfolio  |  "
         "All positions: define stop-loss at 15-20% from entry before initiating"
     )
@@ -237,7 +279,7 @@ def build_summary_dashboard(wb, data):
         if not sector_sorted:
             continue
 
-        sector_color = SECTOR_COLORS.get(sector, ACCENT_BLUE)
+        sector_color = SECTOR_HEADER_COLORS.get(sector, ACCENT_BLUE)
 
         # Sector header
         ws.merge_cells(f"A{current_row}:{last_col}{current_row}")
@@ -252,35 +294,52 @@ def build_summary_dashboard(wb, data):
         apply_header_row(ws, current_row, headers, height=35, bg=sector_color)
         current_row += 1
 
-        current_row = _write_stock_ranking_rows(ws, sector_sorted, current_row)
+        current_row = _write_stock_ranking_rows(ws, sector_sorted, current_row, num_cols)
         current_row += 2  # gap between sectors
 
     # ── SCREENED-OUT TABLE ────────────────────────────────────────────────────
     screened_out = data.get("screened_out", [])
     if screened_out:
         so_row = current_row + 1
-        ws.merge_cells(f"A{so_row}:F{so_row}")
+        so_cols = 7
+        so_last = get_column_letter(so_cols)
+        ws.merge_cells(f"A{so_row}:{so_last}{so_row}")
         header = ws.cell(row=so_row, column=1, value="SCREENED OUT — DID NOT PASS HARD FILTERS")
         header.font = Font(name="Arial", bold=True, size=11, color=WHITE)
         header.fill = PatternFill("solid", fgColor=DARK_GRAY)
         header.alignment = Alignment(horizontal="left", vertical="center")
         ws.row_dimensions[so_row].height = 22
 
-        apply_header_row(ws, so_row + 1,
-                         ["Ticker", "Company", "Sector", "Filter Failed", "Reason", "Revisit If"],
-                         bg=MID_GRAY, text_color="000000")
+        so_headers = [
+            "Ticker", "Company", "Sector", "Failure Type",
+            "Reason", "Revisit Trigger", "Disqualifier"
+        ]
+        apply_header_row(ws, so_row + 1, so_headers, bg=MID_GRAY, text_color="000000")
+
         for j, so in enumerate(screened_out):
             r = so_row + 2 + j
-            for k, val in enumerate([
+            vals = [
                 so.get("ticker", ""), so.get("company", ""),
                 so.get("sector", ""), so.get("filter_failed", ""),
-                so.get("reason", ""), so.get("revisit_if", "")
-            ], 1):
+                so.get("reason", ""), so.get("revisit_if", ""),
+                so.get("disqualifier", "") or ""
+            ]
+            for k, val in enumerate(vals, 1):
                 cell = ws.cell(row=r, column=k, value=val)
                 style_data_cell(cell, val, row_shade=(j % 2 == 1))
 
+            # Apply sector color to ticker
+            _apply_sector_color_to_ticker(ws.cell(row=r, column=1), so.get("sector", ""))
+
+            # Strikethrough for disqualified entries
+            if so.get("disqualifier"):
+                for k in range(1, so_cols + 1):
+                    cell = ws.cell(row=r, column=k)
+                    cell.font = Font(name="Arial", size=10, color=RED_TEXT, strike=True)
+                    cell.fill = PatternFill("solid", fgColor=RED_BG)
+
     # Column widths
-    col_widths = [6, 8, 28, 22, 10, 10, 10, 18, 10, 8, 10, 35, 35, 14]
+    col_widths = [6, 8, 28, 22, 10, 10, 10, 18, 10, 8, 10, 35, 35, 14, 30, 22, 10]
     for ci, w in enumerate(col_widths, 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
@@ -288,37 +347,54 @@ def build_summary_dashboard(wb, data):
     return ws
 
 
+# ── 7-Criteria scoring system ────────────────────────────────────────────────
+CRITERIA = [
+    ("Valuation", 0.25),
+    ("Balance Sheet", 0.20),
+    ("Catalyst Specificity", 0.20),
+    ("Selloff Quality", 0.15),
+    ("Competitive Moat Integrity", 0.10),
+    ("Macro Alignment", 0.10),
+    ("Analyst Conviction", 0.05),
+]
+
+CRITERIA_KEYS = [
+    "valuation", "balance_sheet", "catalyst_specificity",
+    "selloff_quality", "competitive_moat_integrity",
+    "macro_alignment", "analyst_conviction",
+]
+
+
 def build_stock_scores(wb, data):
-    """Sheet 2: Full scoring matrix — grouped by sector."""
+    """Sheet 2: Full 7-criteria scoring matrix — grouped by sector."""
     ws = wb.create_sheet("STOCK SCORES")
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells("A1:J1")
+    num_score_cols = 2 + len(CRITERIA) + 2  # Ticker, Sector, 7 criteria, Composite, Rec
+    last_col = get_column_letter(num_score_cols)
+
+    ws.merge_cells(f"A1:{last_col}1")
     title = ws["A1"]
-    title.value = "COMPOSITE SCORING MATRIX"
+    title.value = "COMPOSITE SCORING MATRIX — 7 CRITERIA (v2 Post-Mortem Updated)"
     title.font = Font(name="Arial", bold=True, size=14, color=WHITE)
     title.fill = PatternFill("solid", fgColor=NAVY)
     title.alignment = Alignment(horizontal="center", vertical="center")
     ws.row_dimensions[1].height = 36
 
-    criteria = [
-        ("Valuation", 0.25),
-        ("Balance Sheet", 0.20),
-        ("Catalyst", 0.20),
-        ("Selloff Quality", 0.15),
-        ("Industry Protection", 0.10),
-        ("Analyst Conviction", 0.10),
-    ]
-
-    weight_headers = ["Ticker", "Sector"] + [f"{c[0]}\n(w={c[1]:.0%})" for c in criteria] + ["Composite\nScore", "Rec."]
+    weight_headers = (
+        ["Ticker", "Sector"]
+        + [f"{c[0]}\n(w={c[1]:.0%})" for c in CRITERIA]
+        + ["Composite\nScore", "Rec."]
+    )
     apply_header_row(ws, 2, weight_headers, height=40)
 
     # Note row
-    ws.merge_cells("A3:J3")
+    ws.merge_cells(f"A3:{last_col}3")
     note = ws["A3"]
     note.value = (
         "Scores: 0-10 per criterion  |  Blue = Hardcoded inputs  |  "
-        "Black = Formulas  |  Weighted composite = sum of (score x weight)"
+        "Black = Formulas  |  Weighted composite = sum of (score x weight)  |  "
+        "DISQUALIFIED rows have red strikethrough"
     )
     note.font = Font(name="Arial", size=9, italic=True, color=DARK_GRAY)
     note.fill = PatternFill("solid", fgColor="EBF3FB")
@@ -333,8 +409,8 @@ def build_stock_scores(wb, data):
             continue
 
         # Sector divider row
-        sector_color = SECTOR_COLORS.get(sector, ACCENT_BLUE)
-        ws.merge_cells(f"A{current_row}:J{current_row}")
+        sector_color = SECTOR_HEADER_COLORS.get(sector, ACCENT_BLUE)
+        ws.merge_cells(f"A{current_row}:{last_col}{current_row}")
         sec_cell = ws.cell(row=current_row, column=1, value=sector.upper())
         sec_cell.font = Font(name="Arial", bold=True, size=11, color=WHITE)
         sec_cell.fill = PatternFill("solid", fgColor=sector_color)
@@ -346,21 +422,30 @@ def build_stock_scores(wb, data):
             row = current_row
             shade = (i % 2 == 1)
             scores = s.get("scores", {})
+            is_disqualified = s.get("disqualifier_reason") is not None
 
             # Ticker + Sector
-            ws.cell(row=row, column=1, value=s.get("ticker", "")).font = Font(name="Arial", bold=True, size=11)
-            ws.cell(row=row, column=2, value=s.get("sector", "")).font = Font(name="Arial", size=9, color=DARK_GRAY)
+            ticker_cell = ws.cell(row=row, column=1, value=s.get("ticker", ""))
+            ticker_cell.font = Font(name="Arial", bold=True, size=11)
+            ticker_cell.border = make_border()
+            _apply_sector_color_to_ticker(ticker_cell, s.get("sector", ""))
 
-            for j, (crit_name, weight) in enumerate(criteria):
-                score_val = scores.get(crit_name.lower().replace(" ", "_"), {}).get("score", "")
+            sector_cell = ws.cell(row=row, column=2, value=s.get("sector", ""))
+            sector_cell.font = Font(name="Arial", size=9, color=DARK_GRAY)
+            sector_cell.border = make_border()
+
+            # 7 criteria scores (columns C through I)
+            for j, key in enumerate(CRITERIA_KEYS):
+                score_val = scores.get(key, {}).get("score", "")
                 cell = ws.cell(row=row, column=3 + j, value=score_val)
                 style_data_cell(cell, score_val, is_input=True, num_format="0.0", row_shade=shade)
 
-            # Composite formula (columns C-H are scores, I is composite)
-            weights = [c[1] for c in criteria]
-            formula_parts = [f"C{row}*{weights[0]}", f"D{row}*{weights[1]}", f"E{row}*{weights[2]}",
-                             f"F{row}*{weights[3]}", f"G{row}*{weights[4]}", f"H{row}*{weights[5]}"]
-            composite_cell = ws.cell(row=row, column=9)
+            # Composite formula (columns C-I are 7 scores, J is composite)
+            score_cols = [get_column_letter(3 + j) for j in range(len(CRITERIA))]
+            weights = [c[1] for c in CRITERIA]
+            formula_parts = [f"{col}{row}*{w}" for col, w in zip(score_cols, weights)]
+            composite_col = 3 + len(CRITERIA)  # Column J (10)
+            composite_cell = ws.cell(row=row, column=composite_col)
             composite_cell.value = "=" + "+".join(formula_parts)
             composite_cell.font = Font(name="Arial", size=11, bold=True, color=BLACK_FORMULA)
             composite_cell.number_format = "0.0"
@@ -368,35 +453,43 @@ def build_stock_scores(wb, data):
             composite_cell.border = make_border()
 
             # Recommendation formula
-            rec_cell = ws.cell(row=row, column=10)
+            rec_col = composite_col + 1  # Column K (11)
+            comp_ref = f"{get_column_letter(composite_col)}{row}"
+            rec_cell = ws.cell(row=row, column=rec_col)
             rec_cell.value = (
-                f'=IF(I{row}>=7.5,"STRONG BUY",IF(I{row}>=6.5,"BUY",'
-                f'IF(I{row}>=5,"SPECULATIVE BUY","PASS")))'
+                f'=IF({comp_ref}>=8,"STRONG BUY",IF({comp_ref}>=6.5,"BUY",'
+                f'IF({comp_ref}>=5,"SPECULATIVE BUY","PASS")))'
             )
             rec_cell.font = Font(name="Arial", size=10, color=BLACK_FORMULA, bold=True)
             rec_cell.alignment = Alignment(horizontal="center", vertical="center")
             rec_cell.border = make_border()
+
+            # DISQUALIFIED styling
+            if is_disqualified:
+                _apply_disqualified_style(ws, row, num_score_cols)
+
             current_row += 1
 
             # Justification row
-            ws.cell(row=current_row, column=1, value="Rationale:").font = Font(name="Arial", italic=True, size=9, color=DARK_GRAY)
+            ws.cell(row=current_row, column=1, value="Rationale:").font = Font(
+                name="Arial", italic=True, size=9, color=DARK_GRAY)
             justifications = scores.get("justifications", {})
-            for j, (crit_name, _) in enumerate(criteria):
-                just_text = justifications.get(crit_name.lower().replace(" ", "_"), "")
+            for j, key in enumerate(CRITERIA_KEYS):
+                just_text = justifications.get(key, "")
                 cell = ws.cell(row=current_row, column=3 + j, value=just_text)
                 cell.font = Font(name="Arial", italic=True, size=8, color=DARK_GRAY)
                 cell.alignment = Alignment(wrap_text=True, vertical="top", horizontal="left")
-            ws.row_dimensions[current_row].height = 42
+            ws.row_dimensions[current_row].height = 50
             current_row += 1
 
         current_row += 1  # gap between sectors
 
     ws.column_dimensions["A"].width = 10
     ws.column_dimensions["B"].width = 20
-    for col in ["C", "D", "E", "F", "G", "H"]:
-        ws.column_dimensions[col].width = 16
-    ws.column_dimensions["I"].width = 12
-    ws.column_dimensions["J"].width = 16
+    for j in range(len(CRITERIA)):
+        ws.column_dimensions[get_column_letter(3 + j)].width = 16
+    ws.column_dimensions[get_column_letter(composite_col)].width = 12
+    ws.column_dimensions[get_column_letter(rec_col)].width = 16
 
     ws.freeze_panes = "A4"
     return ws
@@ -454,6 +547,9 @@ def build_valuation_comps(wb, data):
         for col_idx, (val, fmt, is_inp) in enumerate(row_vals, 1):
             cell = ws.cell(row=row, column=col_idx, value=val)
             style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
+
+        # Sector color on ticker
+        _apply_sector_color_to_ticker(ws.cell(row=row, column=1), s.get("sector", ""))
         ws.row_dimensions[row].height = 18
 
     for ci, w in enumerate([10, 20, 10, 8, 12, 12, 12, 10, 14, 14, 8, 8, 10, 10, 10, 14, 12], 1):
@@ -520,6 +616,8 @@ def build_fundamental_data(wb, data):
         for col_idx, (val, fmt, is_inp) in enumerate(row_vals, 1):
             cell = ws.cell(row=row, column=col_idx, value=val)
             style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
+
+        _apply_sector_color_to_ticker(ws.cell(row=row, column=1), s.get("sector", ""))
         ws.row_dimensions[row].height = 18
 
     for ci, w in enumerate([10, 28, 20, 10, 8, 10, 10, 10, 10, 8, 8, 10, 14, 10, 10, 10, 10, 10, 10, 10], 1):
@@ -594,7 +692,7 @@ def build_risk_matrix(wb, data):
     ws = wb.create_sheet("RISK MATRIX")
     ws.sheet_view.showGridLines = False
 
-    ws.merge_cells("A1:M1")
+    ws.merge_cells("A1:N1")
     t = ws["A1"]
     t.value = "RISK MATRIX — BULL / BASE / BEAR SCENARIOS & EXPECTED VALUE"
     t.font = Font(name="Arial", bold=True, size=14, color=WHITE)
@@ -607,22 +705,13 @@ def build_risk_matrix(wb, data):
         "Bull Case Desc.", "Bull Target", "Bull Return (%)", "P(Bull)",
         "Base Case Desc.", "Base Target", "Base Return (%)", "P(Base)",
         "Bear Case Desc.", "Bear Target", "Bear Return (%)", "P(Bear)",
+        "Expected\nValue (%)",
     ]
     apply_header_row(ws, 2, headers, height=40)
 
-    # EV header in row 3
-    ev_headers = ["", "", "", "", "", "", "", "", "", "", "", "", "Expected Value (%)"]
-    for ci, h in enumerate(ev_headers, 1):
-        cell = ws.cell(row=3, column=ci, value=h)
-        if h:
-            cell.font = Font(name="Arial", bold=True, size=9, color=DARK_GRAY)
-            cell.fill = PatternFill("solid", fgColor=LIGHT_GRAY)
-            cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
-            cell.border = make_border()
-
     stocks = data.get("stocks", [])
     for i, s in enumerate(stocks):
-        row = 4 + i
+        row = 3 + i
         shade = (i % 2 == 1)
         sc = s.get("scenarios", {})
         bull = sc.get("bull", {})
@@ -635,17 +724,10 @@ def build_risk_matrix(wb, data):
         base_ret_val = base.get("return_pct", "")
         bear_ret_val = bear.get("return_pct", "")
 
-        # P(Bear) = 1 - P(Bull) - P(Base)
         if all(isinstance(x, (int, float)) for x in [p_bull, p_base]):
             p_bear_val = round(1 - p_bull - p_base, 2)
         else:
             p_bear_val = ""
-
-        # Expected value
-        if all(isinstance(x, (int, float)) for x in [p_bull, p_base, bull_ret_val, base_ret_val, bear_ret_val]) and p_bear_val != "":
-            ev_val = round(p_bull * bull_ret_val + p_base * base_ret_val + p_bear_val * bear_ret_val, 4)
-        else:
-            ev_val = ""
 
         row_vals = [
             (s.get("ticker", ""),                "@",           True),
@@ -667,42 +749,18 @@ def build_risk_matrix(wb, data):
             cell = ws.cell(row=row, column=col_idx, value=val)
             style_data_cell(cell, val, is_input=is_inp, num_format=fmt, row_shade=shade)
 
+        # EV formula
+        ev_formula = f"=E{row}*D{row}+I{row}*H{row}+M{row}*L{row}"
+        ev_cell = ws.cell(row=row, column=14, value=ev_formula)
+        style_data_cell(ev_cell, ev_formula, num_format="0.0%", row_shade=shade)
+
+        _apply_sector_color_to_ticker(ws.cell(row=row, column=1), s.get("sector", ""))
         ws.row_dimensions[row].height = 22
-
-    # EV column (N) — put the expected value beside the P(Bear) column
-    for i, s in enumerate(stocks):
-        row = 4 + i
-        sc = s.get("scenarios", {})
-        bull = sc.get("bull", {})
-        base = sc.get("base", {})
-        bear = sc.get("bear", {})
-        p_bull = bull.get("probability", 0)
-        p_base = base.get("probability", 0)
-        bull_ret = bull.get("return_pct", "")
-        base_ret = base.get("return_pct", "")
-        bear_ret = bear.get("return_pct", "")
-
-        if all(isinstance(x, (int, float)) for x in [p_bull, p_base, bull_ret, base_ret, bear_ret]):
-            p_bear = 1 - p_bull - p_base
-            ev = p_bull * bull_ret + p_base * base_ret + p_bear * bear_ret
-            # Use formula referencing the row
-            ev_formula = f"=E{row}*D{row}+I{row}*H{row}+M{row}*L{row}"
-            cell = ws.cell(row=row, column=14, value=ev_formula)
-        else:
-            cell = ws.cell(row=row, column=14, value="")
-        style_data_cell(cell, cell.value, num_format="0.0%", row_shade=(i % 2 == 1))
-
-    # Add EV header
-    ev_hdr = ws.cell(row=2, column=14, value="Expected\nValue (%)")
-    ev_hdr.font = Font(name="Arial", bold=True, size=11, color=WHITE)
-    ev_hdr.fill = PatternFill("solid", fgColor=NAVY)
-    ev_hdr.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
-    ev_hdr.border = make_border()
 
     for ci, w in enumerate([10, 30, 10, 10, 8, 30, 10, 10, 8, 30, 10, 10, 8, 10], 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
-    ws.freeze_panes = "A4"
+    ws.freeze_panes = "A3"
     return ws
 
 
@@ -757,7 +815,8 @@ def build_nvo_deep_dive(wb, data):
     ws.row_dimensions[current_row].height = 24
     current_row += 1
 
-    pipe_headers = ["Asset", "Indication", "Phase", "Status", "Timeline", "Market Size ($B)", "Probability", "Bear Rev ($M)", "Base Rev ($M)", "Bull Rev ($M)"]
+    pipe_headers = ["Asset", "Indication", "Phase", "Status", "Timeline",
+                    "Market Size ($B)", "Probability", "Bear Rev ($M)", "Base Rev ($M)", "Bull Rev ($M)"]
     apply_header_row(ws, current_row, pipe_headers, col_start=1, bg=MID_GRAY, text_color="000000")
     current_row += 1
 
@@ -869,7 +928,8 @@ def build_nvo_deep_dive(wb, data):
     verdict_cell_label = ws.cell(row=current_row, column=1, value="Conclusion:")
     verdict_cell_label.font = Font(name="Arial", bold=True, size=11)
     verdict_cell = ws.cell(row=current_row, column=2, value=verdict.get("conclusion", ""))
-    verdict_cell.font = Font(name="Arial", bold=True, size=13, color=GREEN_TEXT if verdict.get("bullish") else RED_TEXT)
+    verdict_cell.font = Font(name="Arial", bold=True, size=13,
+                             color=GREEN_TEXT if verdict.get("bullish") else RED_TEXT)
     current_row += 1
 
     ws.merge_cells(f"A{current_row}:J{current_row + 4}")
@@ -940,7 +1000,6 @@ def build_assumptions(wb, data):
 
     current_row += 1
 
-    # Data sources section
     apply_header_row(ws, current_row, ["DATA SOURCES", "Description", "As-of Date", "Notes"], bg=ACCENT_BLUE)
     current_row += 1
 
@@ -958,6 +1017,250 @@ def build_assumptions(wb, data):
 
     for ci, w in enumerate([35, 30, 40, 30], 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
+
+    ws.freeze_panes = "A3"
+    return ws
+
+
+def build_screener_logic(wb, data):
+    """Sheet 9: Screener Logic — Documents the updated screening methodology."""
+    ws = wb.create_sheet("SCREENER LOGIC")
+    ws.sheet_view.showGridLines = False
+
+    ws.merge_cells("A1:D1")
+    t = ws["A1"]
+    t.value = "SCREENER LOGIC — METHODOLOGY & DECISION FRAMEWORK"
+    t.font = Font(name="Arial", bold=True, size=14, color=WHITE)
+    t.fill = PatternFill("solid", fgColor=NAVY)
+    t.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 40
+
+    current_row = 3
+
+    # Helper to write a section header
+    def section_header(row, title, bg=ACCENT_BLUE):
+        ws.merge_cells(f"A{row}:D{row}")
+        cell = ws.cell(row=row, column=1, value=title)
+        cell.font = Font(name="Arial", bold=True, size=12, color=WHITE)
+        cell.fill = PatternFill("solid", fgColor=bg)
+        cell.alignment = Alignment(horizontal="left", vertical="center")
+        ws.row_dimensions[row].height = 26
+        return row + 1
+
+    def data_row(row, col1, col2="", col3="", col4="", bold_first=False, shade=False):
+        vals = [col1, col2, col3, col4]
+        for ci, val in enumerate(vals, 1):
+            cell = ws.cell(row=row, column=ci, value=val)
+            cell.font = Font(name="Arial", size=10,
+                             bold=(ci == 1 and bold_first),
+                             color=DARK_GRAY if ci > 1 else BLACK_FORMULA)
+            cell.alignment = Alignment(wrap_text=True, vertical="top", horizontal="left")
+            cell.border = make_border()
+            if shade:
+                cell.fill = PatternFill("solid", fgColor=LIGHT_GRAY)
+        ws.row_dimensions[row].height = 22
+        return row + 1
+
+    # ── Section 1: 7 Scoring Criteria ────────────────────────────────────────
+    current_row = section_header(current_row, "7-CRITERIA SCORING SYSTEM (v2 — Post-Mortem Updated)")
+    apply_header_row(ws, current_row, ["Criterion", "Weight", "Key Question", "Threshold Notes"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    criteria_data = [
+        ("Valuation", "25%", "How cheap is the stock on absolute and relative basis?",
+         "9-10: Multi-year trough, 40%+ implied upside; 5-6: Modestly below fair value"),
+        ("Balance Sheet", "20%", "Can it survive and fund itself through the downturn?",
+         "9-10: Net cash, IG credit, strong FCF; Hard filter: ND/EBITDA < 3.5x, int cov > 3x"),
+        ("Catalyst Specificity", "20%", "Named, dated, binary catalysts?",
+         "9-10: 2+ named catalysts with dates within 12mo, binary outcome; 3-4: Vague/long-dated"),
+        ("Selloff Quality", "15%", "Single-event overreaction or chronic decay?",
+         "9-10: Classic single-event overreaction, core franchise intact; 1-2: Chronic pattern"),
+        ("Competitive Moat Integrity", "10%", "Is the competitive position intact?",
+         "9-10: Monopoly/near-monopoly intact; Penalty: -1.5pts for structural share loss"),
+        ("Macro Alignment", "10%", "Is macro a tailwind or headwind?",
+         "9-10: Strong tailwind; Cap at 3.0 if bipartisan political targeting/hostile regulation"),
+        ("Analyst Conviction", "5%", "What does smart money think?",
+         "9-10: 75%+ buys, recent upgrades; Must have more Buys than Holds+Sells combined"),
+    ]
+    for i, (crit, wt, question, notes) in enumerate(criteria_data):
+        current_row = data_row(current_row, crit, wt, question, notes, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 2: Score Interpretation ──────────────────────────────────────
+    current_row = section_header(current_row, "SCORE INTERPRETATION")
+    apply_header_row(ws, current_row, ["Score Range", "Label", "Action", "Position Size"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    interp_data = [
+        ("8.0 - 10.0", "STRONG BUY", "High conviction entry", "3-5% position"),
+        ("6.5 - 7.9", "BUY", "Solid entry", "2-3% position"),
+        ("5.0 - 6.4", "SPECULATIVE BUY", "Small position or watchlist", "1% or watchlist"),
+        ("3.0 - 4.9", "PASS", "Do not initiate", "N/A"),
+        ("0 - 2.9", "AVOID", "Does not fit strategy", "N/A"),
+        ("DISQUALIFIED", "DISQUALIFIED", "Hard disqualifier triggered — do not invest", "N/A"),
+    ]
+    for i, (rng, label, action, size) in enumerate(interp_data):
+        current_row = data_row(current_row, rng, label, action, size, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 3: Hard Filters ──────────────────────────────────────────────
+    current_row = section_header(current_row, "HARD FILTERS (All Must Pass)")
+    apply_header_row(ws, current_row, ["Filter", "Threshold", "Rationale", "Override Condition"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    filters_data = [
+        ("ATH Selloff", "Must be >30% below all-time high",
+         "Target beaten-down stocks with asymmetric upside", "None — absolute requirement"),
+        ("Recovery Filter", "(price - 52w_low) / (52w_high - 52w_low) < 50%",
+         "Catch early-stage bottoming, not stocks that have already recovered", "None"),
+        ("Balance Sheet", "ND/EBITDA < 3.5x AND interest coverage > 3x",
+         "Must survive downturn without diluting equity holders", "None"),
+        ("Criminal DOJ Investigation", "Active DOJ/FBI criminal investigation → DISQUALIFIED",
+         "Unbounded downside risk from fines, departures, reputational damage",
+         "Investigation formally closed with no charges AND stock not recovered"),
+        ("Chronic Underperformance", "3+ years underperforming peers, no confirmed inflection → DISQUALIFIED",
+         "'This time is different' is almost never true without concrete evidence",
+         "Confirmed inflection: mgmt action taken + quantitative improvement + external validation"),
+    ]
+    for i, (filt, threshold, rationale, override) in enumerate(filters_data):
+        current_row = data_row(current_row, filt, threshold, rationale, override, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 4: Catalyst Specificity Gate ─────────────────────────────────
+    current_row = section_header(current_row, "CATALYST SPECIFICITY GATE")
+    apply_header_row(ws, current_row, ["Requirement", "Description", "Pass Example", "Fail Example"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    catalyst_data = [
+        ("Named", "Catalyst has a specific name, not 'things will improve'",
+         "CHAMPION-AF trial; FARAPULSE PFA approval", "'salesforce transition'; 'management focus'"),
+        ("Dated", "Quarter/year known for the event",
+         "ACC March 28, 2026; MiniMed spin end-2026", "'over the next 18 months'; 'eventually'"),
+        ("Binary/Near-Binary", "Clear yes/no outcome with quantifiable price impact",
+         "FDA approval (approved/not); Trial readout (positive/negative)",
+         "'gradual improvement'; 'long-term margin expansion'"),
+    ]
+    for i, (req, desc, good, bad) in enumerate(catalyst_data):
+        current_row = data_row(current_row, req, desc, good, bad, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 5: Positive Patterns (BSX/MDT) ──────────────────────────────
+    current_row = section_header(current_row, "POSITIVE PATTERNS (Learned from BSX, MDT Deep Dives)", bg="375623")
+    apply_header_row(ws, current_row, ["Pattern", "Description", "Example", "Score Impact"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    positive_data = [
+        ("Single-Event Overreaction",
+         "Selloff caused by one discrete event; underlying business intact",
+         "BSX: EP grew 35% vs ~40% expected — revenue beat, EPS beat, FCF +38%",
+         "Selloff Quality: 9-10"),
+        ("Named/Dated/Binary Catalysts",
+         "Catalysts with specific name, date, and binary outcome",
+         "BSX: CHAMPION-AF at ACC March 28, 2026 — TAM 5M→20M patients",
+         "Catalyst Specificity: 9-10"),
+        ("Analyst Support Despite Selloff",
+         "Strong buy consensus maintained or upgraded during selloff",
+         "BSX: 35 analysts, 0 sells, mean target +49% above current",
+         "Analyst Conviction: 9-10"),
+        ("Intact Core Franchise",
+         "Core business undamaged — selloff is about fear, not fundamentals",
+         "BSX: WATCHMAN 600K+ implants, Farawave ~70% US PFA share",
+         "Competitive Moat: 9-10"),
+        ("Management Acting (Not Talking)",
+         "Concrete actions taken: acquisitions, board changes, strategic reviews",
+         "MDT: Elliott added ex-Stryker CFO, MiniMed spin announced with timeline",
+         "Catalyst Specificity: +1-2 pts"),
+    ]
+    for i, (pattern, desc, example, impact) in enumerate(positive_data):
+        current_row = data_row(current_row, pattern, desc, example, impact, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 6: Failure Patterns (ZBH/UNH) ───────────────────────────────
+    current_row = section_header(current_row, "FAILURE PATTERNS (Learned from ZBH, UNH Deep Dives)", bg="9C0006")
+    apply_header_row(ws, current_row, ["Pattern", "Description", "Example", "Score Impact"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    failure_data = [
+        ("Criminal Investigation",
+         "Active DOJ/FBI criminal probe → DISQUALIFIED. Unbounded tail risk.",
+         "UNH: DOJ criminal + civil MA fraud investigation; mgmt denied then forced to acknowledge",
+         "DISQUALIFIED — automatic fail"),
+        ("Chronic Underperformance",
+         "3+ years losing share to peers without confirmed inflection",
+         "ZBH: Underperformed S&P 4 of 5 years; 1-3% organic growth vs industry avg",
+         "DISQUALIFIED — automatic fail"),
+        ("Structural Competitor Share Loss",
+         "Better-resourced competitor structurally taking share in core segment",
+         "SYK MAKO taking robotic knee share from ZBH ROSA; LLY gaining GLP-1 share from NVO",
+         "Selloff Quality: -2pts; Moat: -1.5pts"),
+        ("Macro Directly Hostile",
+         "Bipartisan political targeting, regulatory crackdown on core business",
+         "UNH: bipartisan healthcare reform pressure; CMS rate squeeze",
+         "Macro Alignment: cap at 3.0"),
+    ]
+    for i, (pattern, desc, example, impact) in enumerate(failure_data):
+        current_row = data_row(current_row, pattern, desc, example, impact, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 7: Sector Balance Rule ───────────────────────────────────────
+    current_row = section_header(current_row, "SECTOR BALANCE RULE")
+    apply_header_row(ws, current_row, ["Rule", "Description", "Sectors Targeted", "Notes"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    sector_data = [
+        ("Minimum Sectors", "Final output must include candidates from >= 3 sectors",
+         "Healthcare, Defense/Aerospace, Consumer Staples, Industrials, Utilities, International",
+         "Do not force bad picks to meet targets"),
+        ("Healthcare Cap", "If >4 healthcare names and <2 non-healthcare, continue screening",
+         "N/A", "Healthcare is naturally good fit but need diversification"),
+        ("Sector Valuation", "Use sector-specific P/E benchmarks, not S&P average",
+         "HC Devices 18-25x; Defense 18-22x; Staples 20-24x; Industrials 18-22x; Utilities 16-20x",
+         "Don't penalize utility at 15x or reward defense at 20x"),
+    ]
+    for i, (rule, desc, sectors, notes) in enumerate(sector_data):
+        current_row = data_row(current_row, rule, desc, sectors, notes, bold_first=True, shade=(i % 2 == 1))
+
+    current_row += 1
+
+    # ── Section 8: Screened Out Failure Types ────────────────────────────────
+    current_row = section_header(current_row, "SCREENED-OUT FAILURE TYPE CATEGORIES")
+    apply_header_row(ws, current_row, ["Category", "Description", "Action", "Revisit Trigger"], bg=MID_GRAY, text_color="000000")
+    current_row += 1
+
+    failure_types = [
+        ("HARD FILTER: Criminal/DOJ probe",
+         "Active criminal investigation by DOJ/FBI",
+         "Immediate disqualification", "Investigation closed with no charges"),
+        ("HARD FILTER: Chronic underperformer",
+         "3+ years underperforming, no confirmed inflection",
+         "Immediate disqualification", "2+ quarters of above-industry organic growth"),
+        ("HARD FILTER: Structural share loss",
+         "Competitor structurally gaining core segment share",
+         "Disqualify unless clear fix", "Documented share stabilization or gain"),
+        ("HARD FILTER: Macro hostile",
+         "Regulatory/political environment actively hostile",
+         "Cap macro score at 3.0", "Policy environment reversal"),
+        ("SOFT PASS: Valuation insufficient",
+         "Stock doesn't meet 30% ATH selloff or recovery filter",
+         "Move to screened out", "Further selloff creates entry"),
+        ("SOFT PASS: Catalyst too vague",
+         "No named/dated/binary catalyst within 12-18 months",
+         "Move to watchlist", "Specific catalyst emerges"),
+    ]
+    for i, (cat, desc, action, trigger) in enumerate(failure_types):
+        current_row = data_row(current_row, cat, desc, action, trigger, bold_first=True, shade=(i % 2 == 1))
+
+    # Column widths
+    ws.column_dimensions["A"].width = 30
+    ws.column_dimensions["B"].width = 40
+    ws.column_dimensions["C"].width = 45
+    ws.column_dimensions["D"].width = 40
 
     ws.freeze_panes = "A3"
     return ws
@@ -996,6 +1299,9 @@ def main():
 
     print("  -> Sheet 8: Assumptions")
     build_assumptions(wb, data)
+
+    print("  -> Sheet 9: Screener Logic")
+    build_screener_logic(wb, data)
 
     os.makedirs("output", exist_ok=True)
     out_path = "output/stock_screener.xlsx"

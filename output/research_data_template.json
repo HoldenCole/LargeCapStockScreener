@@ -1,0 +1,123 @@
+{
+  "stocks": [
+    {
+      "ticker": "EXAMPLE",
+      "company": "Example Corp.",
+      "sector": "Healthcare",
+      "current_price": 0.0,
+      "pct_off_high": -0.30,
+      "composite_score": 0.0,
+      "recommendation": "BUY",
+      "target_price": 0.0,
+      "implied_upside": 0.0,
+      "expected_value_pct": 0.0,
+      "key_risk": "",
+      "key_catalyst": "",
+      "analyst_consensus": "Buy",
+      "catalyst_name": "Named catalyst (e.g., FARAPULSE PFA approval)",
+      "catalyst_date": "Specific date or quarter (e.g., Q4 2026)",
+      "selloff_type": "Single-event overreaction | Multi-factor compounding | Chronic underperformance | Sector rotation",
+      "criminal_flag": false,
+      "disqualifier_reason": null,
+      "scores": {
+        "valuation": {"score": 0.0},
+        "balance_sheet": {"score": 0.0},
+        "catalyst_specificity": {"score": 0.0},
+        "selloff_quality": {"score": 0.0},
+        "competitive_moat_integrity": {"score": 0.0},
+        "macro_alignment": {"score": 0.0},
+        "analyst_conviction": {"score": 0.0},
+        "justifications": {
+          "valuation": "",
+          "balance_sheet": "",
+          "catalyst_specificity": "",
+          "selloff_quality": "",
+          "competitive_moat_integrity": "",
+          "macro_alignment": "",
+          "analyst_conviction": ""
+        }
+      },
+      "valuation": {
+        "fwd_pe": 0.0,
+        "sector_avg_pe": 0.0,
+        "hist_5yr_pe": 0.0,
+        "ev_ebitda": 0.0,
+        "peer_avg_ev_ebitda": 0.0,
+        "p_fcf": 0.0,
+        "ev_sales": 0.0,
+        "bear_target": 0.0,
+        "base_target": 0.0,
+        "bull_target": 0.0,
+        "analyst_avg_target": 0.0
+      },
+      "fundamentals": {
+        "market_cap_b": 0.0,
+        "ev_b": 0.0,
+        "rev_ltm_b": 0.0,
+        "rev_ntm_b": 0.0,
+        "ebitda_margin": 0.0,
+        "eps_ltm": 0.0,
+        "eps_ntm": 0.0,
+        "eps_3yr_cagr": 0.0,
+        "div_yield": 0.0,
+        "balance_sheet": {
+          "net_cash_debt_b": 0.0,
+          "nd_ebitda": 0.0,
+          "interest_coverage": 0.0,
+          "credit_rating": ""
+        },
+        "cash_flow": {
+          "fcf_ltm_b": 0.0,
+          "capex_rev_pct": 0.0
+        }
+      },
+      "catalysts": [
+        {
+          "description": "",
+          "timeline": "",
+          "probability_decimal": 0.0,
+          "impact_if_hit_pct": 0,
+          "impact_if_miss_pct": 0,
+          "monitor_signal": ""
+        }
+      ],
+      "scenarios": {
+        "bull": {
+          "description": "",
+          "price_target": 0.0,
+          "return_pct": 0.0,
+          "probability": 0.25
+        },
+        "base": {
+          "description": "",
+          "price_target": 0.0,
+          "return_pct": 0.0,
+          "probability": 0.50
+        },
+        "bear": {
+          "description": "",
+          "price_target": 0.0,
+          "return_pct": 0.0,
+          "probability": 0.25
+        }
+      }
+    }
+  ],
+  "screened_out": [
+    {
+      "ticker": "EXAMPLE",
+      "company": "Example Corp.",
+      "sector": "Healthcare",
+      "filter_failed": "Balance Sheet | Recovery Filter | Selloff Threshold | Disqualifier",
+      "reason": "",
+      "revisit_if": "",
+      "disqualifier": null
+    }
+  ],
+  "assumptions": {
+    "macro": [],
+    "valuation": [],
+    "peer_groups": [],
+    "data_sources": []
+  }
+}

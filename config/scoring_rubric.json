@@ -2,7 +2,8 @@
   "framework": {
     "description": "Each criterion is scored 0-10. Multiply by weight. Sum = Composite Score (0-10). Higher is better.",
     "minimum_pass_score": 5.0,
-    "strong_buy_threshold": 7.5
+    "strong_buy_threshold": 7.5,
+    "num_criteria": 7
   },
   "criteria": {
     "valuation": {
@@ -31,16 +32,22 @@
       },
       "key_metrics": ["Net Debt / LTM EBITDA", "Interest Coverage Ratio", "Free Cash Flow Yield", "Debt maturity schedule", "Credit rating", "Available revolving credit facility"]
     },
-    "catalyst": {
+    "catalyst_specificity": {
       "weight": 0.20,
-      "description": "Are there specific, time-bound, identifiable events that could drive a re-rating?",
+      "description": "Are there specific, named, dated, binary catalysts that could drive a re-rating?",
       "score_guide": {
-        "9-10": "2+ high-probability catalysts with clear timelines within 12 months, any one of which would likely drive 15%+ move",
-        "7-8": "1-2 solid catalysts within 12-18 months, reasonable probability, meaningful price impact if hit",
-        "5-6": "Catalysts exist but are either slow-moving (multi-year), lower probability, or smaller magnitude",
-        "3-4": "Vague catalysts without specific triggers or timelines",
+        "9-10": "2+ named catalysts with specific dates/events within 12 months, binary outcome (yes/no), any one could drive 15%+ move. Examples: FDA approval date, earnings inflection, contract announcement",
+        "7-8": "1-2 solid named catalysts within 12-18 months, reasonable probability, meaningful price impact if hit",
+        "5-6": "Catalysts exist but are either slow-moving (multi-year), lower probability, or smaller magnitude. No specific dates/binary outcomes",
+        "3-4": "Vague catalysts without specific triggers, timelines, or names. 'Things might get better' is not a catalyst",
         "1-2": "No clear near-term catalysts; thesis relies on long-term mean reversion only",
         "0": "Negative catalyst risk dominates"
+      },
+      "positive_patterns": {
+        "single_event_overreaction": "Selloff caused by a single discrete event (trial miss, one-time charge, tariff announcement) rather than slow structural decay. These resolve faster and more completely.",
+        "named_dated_binary": "Catalysts that have a specific name (e.g., FARAPULSE), a date (e.g., FDA PDUFA Q4 2026), and a binary outcome (approved/not approved). These create clear re-rating triggers.",
+        "management_action": "New CEO, strategic review, cost restructuring — concrete actions management is taking to fix the issue, not just 'hoping things improve'.",
+        "analyst_support_despite_selloff": "Strong buy consensus maintained or upgraded during/after selloff. Smart money sees the opportunity."
       },
       "key_metrics": ["Specific upcoming clinical trial readouts", "Earnings inflection points", "Regulatory decisions", "Management changes", "Buyback/dividend potential", "M&A likelihood", "Contract wins/renewals"]
     },
@@ -48,33 +55,61 @@
       "weight": 0.15,
       "description": "Is this a high-quality selloff (company-specific, temporary, overreaction) or a low-quality one (structural, justified)?",
       "score_guide": {
-        "9-10": "Classic overreaction — single event caused panic selling, fundamentals intact, market extrapolating worst case",
-        "7-8": "Clear company-specific issue that is largely fixable; some uncertainty remains but core franchise undamaged",
-        "5-6": "Mix of company-specific and structural issues; fixable but will take time and execution",
+        "9-10": "Classic single-event overreaction — one discrete event caused panic selling, fundamentals intact, market extrapolating worst case. Core franchise undamaged.",
+        "7-8": "Clear company-specific issue that is largely fixable; some uncertainty remains but core franchise undamaged. 1-2 issues, not 5+.",
+        "5-6": "Mix of company-specific and structural issues; fixable but will take time and execution. Multiple compounding factors.",
         "3-4": "Significant structural headwinds alongside company issues; recovery possible but requires multiple things going right",
-        "1-2": "Primarily structural decline with temporary bounce potential",
+        "1-2": "Primarily structural decline with temporary bounce potential. Chronic underperformance pattern.",
         "0": "Secular decline — the underlying business is being disrupted and won't recover"
       },
-      "key_metrics": ["What specifically caused the selloff", "Selloff magnitude vs fundamental impairment", "Sell-side analyst stance", "Insider buying near lows", "Backlog/customer base intact", "Repeat offender or isolated"]
-    },
-    "industry_protection": {
-      "weight": 0.10,
-      "description": "How insulated is the core demand from macro deterioration?",
-      "score_guide": {
-        "9-10": "Demand completely inelastic to economic cycles — life-saving drugs, essential utilities, government-contracted defense",
-        "7-8": "Highly defensive — healthcare services/devices, consumer staples with strong brands, critical infrastructure",
-        "5-6": "Mostly defensive with some cyclical exposure — specialty industrials, B2B services with long contracts",
-        "3-4": "Mixed — some defensive demand but meaningful cyclical exposure",
-        "1-2": "Significant cyclical exposure; revenues meaningfully correlated with GDP / consumer health",
-        "0": "Highly cyclical; would be severely impacted by the bear macro scenario"
+      "penalties": {
+        "competitor_structural_share_loss": {
+          "condition": "Competitor is structurally gaining market share (not just a temporary blip)",
+          "selloff_quality_penalty": -2.0,
+          "moat_penalty": -1.5,
+          "examples": "LLY gaining GLP-1 share from NVO; SYK gaining ortho share from ZBH"
+        }
       },
-      "key_metrics": ["Revenue correlation with GDP historically", "% of revenue from recurring/contracted sources", "Government/institutional vs. consumer end markets", "Pricing power in a downturn", "Historical performance in 2008-09 and 2020 recessions"]
+      "key_metrics": ["What specifically caused the selloff", "Selloff magnitude vs fundamental impairment", "Sell-side analyst stance", "Insider buying near lows", "Backlog/customer base intact", "Repeat offender or isolated", "Single event vs. chronic pattern"]
+    },
+    "competitive_moat_integrity": {
+      "weight": 0.10,
+      "description": "Is the company's competitive position intact, or is a competitor structurally gaining share?",
+      "score_guide": {
+        "9-10": "Monopoly or near-monopoly position intact. No competitor gaining meaningful share. Pricing power preserved.",
+        "7-8": "Strong market position with durable advantages. Minor competitive threats manageable. Share stable or growing.",
+        "5-6": "Solid position but facing credible competitive threats. Share stable but at risk. Moat being tested.",
+        "3-4": "Losing share to a stronger competitor. Moat eroding. Needs investment to defend position.",
+        "1-2": "Structurally losing share. Competitor has superior product/cost/distribution. Moat significantly impaired.",
+        "0": "No moat. Commodity business being disrupted."
+      },
+      "key_metrics": ["Market share trend (3-5 year)", "Competitor product superiority", "Pricing power retention", "Customer switching costs", "Brand strength", "R&D pipeline strength vs. peers"]
+    },
+    "macro_alignment": {
+      "weight": 0.10,
+      "description": "Is the current macro environment a tailwind or headwind for this specific stock's recovery thesis?",
+      "score_guide": {
+        "9-10": "Macro is a strong tailwind — regulatory support, favorable policy changes, structural demand growth aligns with recovery timing",
+        "7-8": "Macro is neutral to slightly positive — no major headwinds, some tailwinds from policy or cycle positioning",
+        "5-6": "Macro is mixed — some headwinds (rates, regulation) offset by some tailwinds (demand, policy)",
+        "3-4": "Macro is a headwind — regulatory pressure, policy uncertainty, or cycle positioning works against the thesis",
+        "1-2": "Macro is actively hostile — e.g., bipartisan political targeting, active regulatory crackdown, severe cycle risk",
+        "0": "Macro environment makes recovery nearly impossible in the foreseeable future"
+      },
+      "key_metrics": ["Regulatory/policy environment", "Interest rate sensitivity", "Political risk (bipartisan targeting)", "Cycle positioning", "Industry-specific macro factors"],
+      "penalties": {
+        "macro_hostility": {
+          "condition": "Bipartisan political targeting, active regulatory crackdown, or policy environment actively working against the company",
+          "score_cap": 3.0,
+          "examples": "UNH facing bipartisan healthcare reform pressure; tobacco facing global regulatory tightening"
+        }
+      }
     },
     "analyst_conviction": {
-      "weight": 0.10,
+      "weight": 0.05,
       "description": "What does the smart money think, and how confident are they?",
       "score_guide": {
-        "9-10": "Strong buy consensus (75%+ buys), low price target dispersion, recent upgrades from credible banks",
+        "9-10": "Strong buy consensus (75%+ buys), low price target dispersion, recent upgrades from credible banks during/after selloff",
         "7-8": "Majority buy-rated (55-75%), reasonable target dispersion, stable or improving analyst sentiment",
         "5-6": "Mixed consensus (40-55% buys), moderate dispersion, some recent downgrades offset by holds",
         "3-4": "Mostly hold-rated (30-40% buys), high target dispersion, recent downgrade cycle",
@@ -84,11 +119,41 @@
       "key_metrics": ["% Buy / % Hold / % Sell ratings", "Recent rating changes (last 30-60 days)", "Target price standard deviation", "Implied upside in consensus target", "Commentary from JPM, GS, MS"]
     }
   },
+  "disqualifiers": {
+    "criminal_investigation": {
+      "trigger": "Active DOJ/FBI criminal investigation into company or senior executives",
+      "action": "DISQUALIFIED — automatic fail regardless of score",
+      "rationale": "Criminal investigations create unbounded downside risk: potential fines in billions, executive departures, customer/partner defection, and reputational damage that can take years to repair",
+      "examples": ["UNH DOJ Medicare Advantage fraud investigation"],
+      "override": "Only if investigation is formally closed with no charges AND stock hasn't already recovered"
+    },
+    "chronic_underperformance": {
+      "trigger": "3+ years of underperforming sector peers with no confirmed inflection point (not just management promises)",
+      "action": "DISQUALIFIED — automatic fail regardless of score",
+      "rationale": "Chronic underperformers rarely turn around without a dramatic external catalyst. 'This time is different' is almost never true without concrete evidence of inflection.",
+      "confirmed_inflection_required": "Must show: (1) specific management action taken (not just announced), (2) early quantitative evidence of improvement (e.g., first quarter of share gains after 12 quarters of losses), (3) external validation (analyst upgrades based on data, not hope)",
+      "examples": ["ZBH chronic share loss to SYK with no confirmed turnaround data"]
+    }
+  },
+  "sector_valuation_benchmarks": {
+    "Healthcare": {"fwd_pe_median": 18.8, "ev_ebitda_median": 17.0, "notes": "Wide range: pharma 12-15x, med-tech 25-35x, MCO 15-20x"},
+    "Defense / Aerospace": {"fwd_pe_median": 22.0, "ev_ebitda_median": 16.0, "notes": "Premium for visibility; backlog/book-to-bill key"},
+    "Consumer Staples": {"fwd_pe_median": 20.0, "ev_ebitda_median": 14.0, "notes": "Stability premium; volume vs. pricing mix matters"},
+    "Industrials": {"fwd_pe_median": 18.0, "ev_ebitda_median": 13.0, "notes": "Cyclical adjustment needed; use mid-cycle earnings"},
+    "Utilities": {"fwd_pe_median": 16.0, "ev_ebitda_median": 12.0, "notes": "Regulated returns; dividend yield is primary metric"},
+    "International": {"fwd_pe_median": 15.0, "ev_ebitda_median": 10.0, "notes": "Country risk discount; ADR liquidity matters"}
+  },
+  "sector_balance_rule": {
+    "minimum_sectors": 3,
+    "target_sectors": 4,
+    "note": "If fewer than 3 sectors have qualifying candidates, document why and proceed with available sectors. Do not force bad picks to meet sector targets."
+  },
   "composite_score_interpretation": {
     "8.0-10.0": {"label": "STRONG BUY", "action": "High conviction entry; 3-5% position size", "expected_return": "35-60% over 12-18 months"},
     "6.5-7.9": {"label": "BUY", "action": "Solid entry; 2-3% position size", "expected_return": "20-35% over 12-18 months"},
     "5.0-6.4": {"label": "SPECULATIVE BUY", "action": "Small position or watchlist; wait for more catalyst clarity", "expected_return": "10-20% over 12-18 months"},
     "3.0-4.9": {"label": "HOLD / PASS", "action": "Do not initiate; revisit if price declines further", "expected_return": "Unclear risk/reward"},
-    "0-2.9": {"label": "AVOID", "action": "Does not fit strategy", "expected_return": "Negative expected value"}
+    "0-2.9": {"label": "AVOID", "action": "Does not fit strategy", "expected_return": "Negative expected value"},
+    "DISQUALIFIED": {"label": "DISQUALIFIED", "action": "Hard disqualifier triggered — do not invest regardless of score", "expected_return": "Unbounded downside risk"}
   }
 }

@@ -1,33 +1,174 @@
 {
   "stocks": [
     {
+      "ticker": "BSX",
+      "company": "Boston Scientific Corp.",
+      "sector": "Healthcare",
+      "current_price": 71.21,
+      "pct_off_high": -0.350,
+      "composite_score": 8.2,
+      "recommendation": "STRONG BUY",
+      "target_price": 100.00,
+      "implied_upside": 0.404,
+      "expected_value_pct": 0.215,
+      "key_risk": "Tariff risk on medical device supply chain; premium valuation on trailing P/E",
+      "key_catalyst": "CHAMPION-AF trial readout ACC March 28 2026; FARAPULSE PFA dominance; Penumbra integration",
+      "analyst_consensus": "Strong Buy",
+      "catalyst_name": "CHAMPION-AF trial readout at ACC",
+      "catalyst_date": "March 28, 2026",
+      "selloff_type": "Single-event overreaction",
+      "criminal_flag": false,
+      "disqualifier_reason": null,
+      "scores": {
+        "valuation": {"score": 5.5},
+        "balance_sheet": {"score": 7.0},
+        "catalyst_specificity": {"score": 9.5},
+        "selloff_quality": {"score": 9.0},
+        "competitive_moat_integrity": {"score": 9.0},
+        "macro_alignment": {"score": 8.5},
+        "analyst_conviction": {"score": 9.5},
+        "justifications": {
+          "valuation": "36.7x trailing P/E looks expensive but reflects 12%+ organic growth; EV/EBITDA 31x is rich; P/FCF 28.6x more reasonable for high-growth med-tech. Discount to own history on forward basis given growth acceleration.",
+          "balance_sheet": "ND/EBITDA 2.78x; BBB credit; $3.7B FCF; adequate for continued investment; leverage trending down post-Penumbra acquisition. Interest coverage 11.4x is strong.",
+          "catalyst_specificity": "CHAMPION-AF at ACC March 28, 2026 — named, dated, binary. If positive, expands PFA TAM from 5M to 20M patients. FARAPULSE already ~70% US PFA share. Penumbra acquisition same month as crash signals management confidence.",
+          "selloff_quality": "Classic single-event overreaction. EP revenue grew 35% vs ~40% expected — revenue beat, EPS beat, FCF grew 38%. Market punished growth rate miss on high-multiple stock. Core franchise completely intact. 12%+ organic growth continued.",
+          "competitive_moat_integrity": "WATCHMAN has 600K+ implants with 10-year track record, no competing device with meaningful installed base. Farawave has ~70% US PFA market share. Selloff had nothing to do with competitive threats. Moat is widening, not eroding.",
+          "macro_alignment": "Medical devices are reimbursed by government/private insurance; demand is non-discretionary. Cardiac procedures accelerate with aging population. Tariff risk is the only macro headwind — manageable and likely exempted for medical devices.",
+          "analyst_conviction": "35 analysts, 0 sell ratings, mean target +49% above current price. Strong buy consensus maintained throughout selloff. Smart money unanimously sees this as an entry opportunity."
+        }
+      },
+      "valuation": {
+        "fwd_pe": 38.5,
+        "sector_avg_pe": 25.0,
+        "hist_5yr_pe": 30.0,
+        "ev_ebitda": 31.1,
+        "peer_avg_ev_ebitda": 18.0,
+        "p_fcf": 28.6,
+        "ev_sales": 5.8,
+        "bear_target": 60.00,
+        "base_target": 100.00,
+        "bull_target": 130.00,
+        "analyst_avg_target": 105.00
+      },
+      "fundamentals": {
+        "market_cap_b": 105.7,
+        "ev_b": 116.1,
+        "rev_ltm_b": 20.1,
+        "rev_ntm_b": 22.5,
+        "ebitda_margin": 0.184,
+        "eps_ltm": 1.94,
+        "eps_ntm": 1.85,
+        "eps_3yr_cagr": 0.15,
+        "div_yield": 0.0,
+        "balance_sheet": {
+          "net_cash_debt_b": -10.4,
+          "nd_ebitda": 2.78,
+          "interest_coverage": 11.4,
+          "credit_rating": "BBB"
+        },
+        "cash_flow": {
+          "fcf_ltm_b": 3.7,
+          "capex_rev_pct": 0.040
+        }
+      },
+      "catalysts": [
+        {
+          "description": "CHAMPION-AF trial readout at ACC — PFA vs RF ablation head-to-head",
+          "timeline": "March 28, 2026",
+          "probability_decimal": 0.75,
+          "impact_if_hit_pct": 25,
+          "impact_if_miss_pct": -15,
+          "monitor_signal": "ACC conference presentations; CHAMPION-AF enrollment completion"
+        },
+        {
+          "description": "FARAPULSE pulsed field ablation global adoption acceleration — TAM expansion from 5M to 20M patients",
+          "timeline": "Ongoing through 2026-2027",
+          "probability_decimal": 0.75,
+          "impact_if_hit_pct": 20,
+          "impact_if_miss_pct": -8,
+          "monitor_signal": "EP procedure volumes; FARAPULSE market share; quarterly EP revenue growth"
+        },
+        {
+          "description": "Penumbra neurovascular integration — acquired same month as crash, signals management confidence",
+          "timeline": "H2 2026",
+          "probability_decimal": 0.65,
+          "impact_if_hit_pct": 10,
+          "impact_if_miss_pct": -5,
+          "monitor_signal": "Integration milestones; cross-selling metrics; revenue synergy tracking"
+        },
+        {
+          "description": "Tariff resolution / exemption for medical devices",
+          "timeline": "Q2-Q3 2026",
+          "probability_decimal": 0.50,
+          "impact_if_hit_pct": 15,
+          "impact_if_miss_pct": -10,
+          "monitor_signal": "Trade policy announcements; medical device tariff exemption lobbying results"
+        },
+        {
+          "description": "Continued 12%+ organic revenue growth above med-tech peers",
+          "timeline": "Quarterly earnings",
+          "probability_decimal": 0.65,
+          "impact_if_hit_pct": 10,
+          "impact_if_miss_pct": -8,
+          "monitor_signal": "Quarterly organic growth rates; management guidance updates"
+        }
+      ],
+      "scenarios": {
+        "bull": {
+          "description": "CHAMPION-AF positive; FARAPULSE dominates EP; 14%+ organic growth sustained; tariffs exempted; re-rate to 35x fwd EPS",
+          "price_target": 130.00,
+          "return_pct": 0.826,
+          "probability": 0.30
+        },
+        "base": {
+          "description": "CHAMPION-AF positive; 10-12% organic growth; FARAPULSE strong; tariffs manageable; re-rate to 30x fwd",
+          "price_target": 100.00,
+          "return_pct": 0.404,
+          "probability": 0.45
+        },
+        "bear": {
+          "description": "CHAMPION-AF disappoints; tariffs hit margins; competitive pressure in EP; growth decelerates to 6-8%",
+          "price_target": 60.00,
+          "return_pct": -0.157,
+          "probability": 0.25
+        }
+      }
+    },
+    {
       "ticker": "NVO",
       "company": "Novo Nordisk A/S",
-      "sector": "Healthcare",
+      "sector": "International",
       "current_price": 38.52,
       "pct_off_high": -0.730,
-      "composite_score": 6.8,
+      "composite_score": 7.4,
       "recommendation": "BUY",
       "target_price": 50.00,
       "implied_upside": 0.298,
       "expected_value_pct": 0.152,
-      "key_risk": "CagriSema approval delay; LLY market share gains; IRA pricing",
-      "key_catalyst": "CagriSema FDA decision late 2026; oral Wegovy ramp; amycretin Phase 3",
+      "key_risk": "CagriSema approval delay; LLY structural market share gains; IRA pricing",
+      "key_catalyst": "CagriSema FDA decision late 2026; Medicare obesity coverage Jul 2026; oral Wegovy ramp",
       "analyst_consensus": "Hold",
+      "catalyst_name": "CagriSema FDA approval decision",
+      "catalyst_date": "Q4 2026",
+      "selloff_type": "Multi-factor compounding",
+      "criminal_flag": false,
+      "disqualifier_reason": null,
       "scores": {
         "valuation": {"score": 8.5},
         "balance_sheet": {"score": 8.5},
-        "catalyst": {"score": 7.0},
-        "selloff_quality": {"score": 5.5},
-        "industry_protection": {"score": 8.0},
-        "analyst_conviction": {"score": 4.0},
+        "catalyst_specificity": {"score": 7.0},
+        "selloff_quality": {"score": 5.0},
+        "competitive_moat_integrity": {"score": 5.0},
+        "macro_alignment": {"score": 7.0},
+        "analyst_conviction": {"score": 3.5},
         "justifications": {
-          "valuation": "12.0x fwd P/E vs 37.5x 5-yr avg and 18.8x sector avg; 50% discount to peer EV/EBITDA; trough multiples not seen in a decade",
-          "balance_sheet": "ND/EBITDA 0.72x; AA- credit; $8.6B FCF; interest coverage >14x; can self-fund recovery and M&A",
-          "catalyst": "CagriSema FDA decision late 2026; oral Wegovy 170K patients in 4 weeks; amycretin Phase 3 initiated; Medicare obesity coverage Jul 2026",
-          "selloff_quality": "Multiple compounding issues (trial miss, guidance cuts, pricing pressure, competition); not a single clean overreaction but fundamentals still strong",
-          "industry_protection": "GLP-1 drugs are medically necessary for diabetes/obesity; 40M+ potential Medicare beneficiaries; demand is inelastic and structurally growing",
-          "analyst_conviction": "Only 2/11 buy-rated; 7 holds, 2 sells; consensus is cautious; recent wave of downgrades from TD Cowen, Goldman, Deutsche Bank"
+          "valuation": "12.0x fwd P/E vs 37.5x 5-yr avg and 18.8x sector avg; 50% discount to peer EV/EBITDA; trough multiples not seen in a decade. Priced as declining pharma despite $8.6B FCF.",
+          "balance_sheet": "ND/EBITDA 0.72x; AA- credit; $8.6B FCF; interest coverage >14x; can self-fund recovery and M&A. One of the strongest balance sheets in large-cap pharma.",
+          "catalyst_specificity": "CagriSema FDA decision late 2026 (named, dated, binary); Medicare obesity coverage Jul 2026 (40M+ beneficiaries); oral Wegovy 170K patients in 4 weeks. Multiple catalysts but CagriSema outcome uncertain after REDEFINE 4 loss.",
+          "selloff_quality": "Multiple compounding issues: REDEFINE 1 trial miss, 3 guidance cuts, REDEFINE 4 head-to-head loss vs tirzepatide, IRA pricing, EVOKE Alzheimer's failure. Not a single clean overreaction — chronic bad news accumulation. Fundamentals still strong but narrative is broken.",
+          "competitive_moat_integrity": "LLY structurally gaining GLP-1 share (60% vs NVO's 40%), clinically superior (25.5% vs 23.0% weight loss). Competitor share loss penalty applied (-1.5pts). NVO retains advantages: first oral obesity pill, CKD label, broader pipeline diversity.",
+          "macro_alignment": "Pharma is defensive in credit stress scenarios; GLP-1 demand is secular and growing. However IRA pricing creates government rate risk (Ozempic negotiated to $277 from $650). Medicare obesity coverage is a tailwind. Net positive but IRA offsets.",
+          "analyst_conviction": "Only 2/11 buy-rated; 7 holds, 2 sells; consensus cautious; wave of downgrades from TD Cowen, Goldman, Deutsche Bank. Smart money has given up — contrarian signal but also red flag."
         }
       },
       "valuation": {
@@ -74,20 +215,20 @@
           "monitor_signal": "FDA advisory committee date; PDUFA date announcement"
         },
         {
-          "description": "Oral Wegovy commercial ramp exceeds expectations (170K patients in 4 weeks)",
-          "timeline": "Q2-Q3 2026",
-          "probability_decimal": 0.55,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Weekly prescription data; quarterly revenue disclosures"
-        },
-        {
           "description": "Medicare obesity drug coverage begins (40M+ new beneficiaries)",
           "timeline": "Jul 2026",
           "probability_decimal": 0.85,
           "impact_if_hit_pct": 20,
           "impact_if_miss_pct": -10,
           "monitor_signal": "CMS implementation; formulary inclusion; patient enrollment data"
+        },
+        {
+          "description": "Oral Wegovy commercial ramp exceeds expectations (170K patients in 4 weeks)",
+          "timeline": "Q2-Q3 2026",
+          "probability_decimal": 0.55,
+          "impact_if_hit_pct": 15,
+          "impact_if_miss_pct": -5,
+          "monitor_signal": "Weekly prescription data; quarterly revenue disclosures"
         },
         {
           "description": "Amycretin (Zenagamtide) Phase 3 AMAZE interim data",
@@ -175,267 +316,44 @@
       }
     },
     {
-      "ticker": "UNH",
-      "company": "UnitedHealth Group Inc.",
-      "sector": "Healthcare",
-      "current_price": 286.80,
-      "pct_off_high": -0.545,
-      "composite_score": 7.2,
-      "recommendation": "BUY",
-      "target_price": 420.00,
-      "implied_upside": 0.465,
-      "expected_value_pct": 0.185,
-      "key_risk": "DOJ investigation; Medicare Advantage regulatory pressure; CEO transition",
-      "key_catalyst": "DOJ resolution; MA rate normalization; earnings recovery; new CEO execution",
-      "analyst_consensus": "Buy",
-      "scores": {
-        "valuation": {"score": 7.5},
-        "balance_sheet": {"score": 7.5},
-        "catalyst": {"score": 7.0},
-        "selloff_quality": {"score": 7.0},
-        "industry_protection": {"score": 9.0},
-        "analyst_conviction": {"score": 6.5},
-        "justifications": {
-          "valuation": "21.7x trailing P/E vs 22x 5-yr avg; modest discount but enormous FCF ($16B) and scale justify premium; cheapest in years",
-          "balance_sheet": "ND/EBITDA 2.18x; A+ credit; $16.1B FCF; interest coverage 4.7x; manageable leverage for a $260B company",
-          "catalyst": "DOJ investigation resolution could remove major overhang; Medicare Advantage rate cycle normalization; Optum growth reacceleration; new management reset",
-          "selloff_quality": "Company-specific governance and regulatory issues, NOT structural decline in healthcare demand; MCO model is intact; 52M+ members",
-          "industry_protection": "Health insurance is essential and non-discretionary; aging population is structural tailwind; government-funded programs provide demand floor",
-          "analyst_conviction": "Majority buy-rated despite selloff; analysts view DOJ as manageable; consensus target well above current price"
-        }
-      },
-      "valuation": {
-        "fwd_pe": 22.8,
-        "sector_avg_pe": 18.8,
-        "hist_5yr_pe": 22.0,
-        "ev_ebitda": 13.5,
-        "peer_avg_ev_ebitda": 14.0,
-        "p_fcf": 16.2,
-        "ev_sales": 0.7,
-        "bear_target": 220.00,
-        "base_target": 420.00,
-        "bull_target": 550.00,
-        "analyst_avg_target": 450.00
-      },
-      "fundamentals": {
-        "market_cap_b": 260.3,
-        "ev_b": 310.6,
-        "rev_ltm_b": 447.6,
-        "rev_ntm_b": 470.0,
-        "ebitda_margin": 0.052,
-        "eps_ltm": 13.23,
-        "eps_ntm": 12.60,
-        "eps_3yr_cagr": 0.08,
-        "div_yield": 0.031,
-        "balance_sheet": {
-          "net_cash_debt_b": -50.3,
-          "nd_ebitda": 2.18,
-          "interest_coverage": 4.7,
-          "credit_rating": "A+"
-        },
-        "cash_flow": {
-          "fcf_ltm_b": 16.1,
-          "capex_rev_pct": 0.012
-        }
-      },
-      "catalysts": [
-        {
-          "description": "DOJ Medicare Advantage investigation resolution or settlement",
-          "timeline": "H2 2026 - 2027",
-          "probability_decimal": 0.55,
-          "impact_if_hit_pct": 30,
-          "impact_if_miss_pct": -20,
-          "monitor_signal": "DOJ filings; settlement discussions; congressional hearings"
-        },
-        {
-          "description": "Medicare Advantage rate normalization (CMS 2027 rates)",
-          "timeline": "Q1 2027",
-          "probability_decimal": 0.60,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -10,
-          "monitor_signal": "CMS advance notice; final rate announcement; V28 risk model transition"
-        },
-        {
-          "description": "New CEO stabilization and strategic reset",
-          "timeline": "Q2-Q4 2026",
-          "probability_decimal": 0.65,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Earnings calls; investor day; strategic initiatives announced"
-        },
-        {
-          "description": "Optum Health and Optum Rx growth reacceleration",
-          "timeline": "H2 2026",
-          "probability_decimal": 0.55,
-          "impact_if_hit_pct": 20,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Quarterly segment revenue growth; pharmacy benefit renewals"
-        }
-      ],
-      "scenarios": {
-        "bull": {
-          "description": "DOJ settles favorably; MA rates improve; Optum reaccelerates; re-rate to 25x fwd P/E",
-          "price_target": 550.00,
-          "return_pct": 0.917,
-          "probability": 0.20
-        },
-        "base": {
-          "description": "DOJ overhang persists but manageable; EPS stabilizes at $13-14; re-rate to 22x fwd",
-          "price_target": 420.00,
-          "return_pct": 0.465,
-          "probability": 0.50
-        },
-        "bear": {
-          "description": "DOJ escalates; MA reimbursement cuts; Optum margin compression; leadership uncertainty",
-          "price_target": 220.00,
-          "return_pct": -0.233,
-          "probability": 0.30
-        }
-      }
-    },
-    {
-      "ticker": "ZBH",
-      "company": "Zimmer Biomet Holdings Inc.",
-      "sector": "Healthcare",
-      "current_price": 92.61,
-      "pct_off_high": -0.485,
-      "composite_score": 6.5,
-      "recommendation": "SPECULATIVE BUY",
-      "target_price": 120.00,
-      "implied_upside": 0.296,
-      "expected_value_pct": 0.128,
-      "key_risk": "Procedure volume recovery slower than expected; competitive pressure from SYK",
-      "key_catalyst": "Surgical robot ROSA adoption; knee/hip procedure volume recovery; margin expansion",
-      "analyst_consensus": "Hold",
-      "scores": {
-        "valuation": {"score": 6.5},
-        "balance_sheet": {"score": 6.0},
-        "catalyst": {"score": 5.5},
-        "selloff_quality": {"score": 6.5},
-        "industry_protection": {"score": 8.0},
-        "analyst_conviction": {"score": 5.5},
-        "justifications": {
-          "valuation": "26.1x trailing P/E vs 22x 5-yr avg; elevated but EV/EBITDA of 11.4x is below peer avg of 18x; reasonable on FCF basis",
-          "balance_sheet": "ND/EBITDA 3.12x; BBB credit; $1.5B FCF; manageable but needs deleveraging; interest coverage 4.7x adequate",
-          "catalyst": "ROSA robotic surgery platform gaining traction; orthopedic procedure backlog from COVID still unwinding; aging demographics structural tailwind",
-          "selloff_quality": "Execution issues and competitive pressure from SYK/MDT; not structural — hip/knee replacement demand is permanent and growing",
-          "industry_protection": "Orthopedic implants are medically necessary; aging population drives structural volume growth; high barriers to entry",
-          "analyst_conviction": "Mixed consensus; some analysts see value at current levels but want execution proof; target dispersion is moderate"
-        }
-      },
-      "valuation": {
-        "fwd_pe": 27.4,
-        "sector_avg_pe": 25.0,
-        "hist_5yr_pe": 22.0,
-        "ev_ebitda": 11.4,
-        "peer_avg_ev_ebitda": 18.0,
-        "p_fcf": 12.3,
-        "ev_sales": 3.1,
-        "bear_target": 75.00,
-        "base_target": 120.00,
-        "bull_target": 145.00,
-        "analyst_avg_target": 110.00
-      },
-      "fundamentals": {
-        "market_cap_b": 18.4,
-        "ev_b": 25.3,
-        "rev_ltm_b": 8.2,
-        "rev_ntm_b": 8.5,
-        "ebitda_margin": 0.269,
-        "eps_ltm": 3.55,
-        "eps_ntm": 3.38,
-        "eps_3yr_cagr": 0.05,
-        "div_yield": 0.010,
-        "balance_sheet": {
-          "net_cash_debt_b": -6.9,
-          "nd_ebitda": 3.12,
-          "interest_coverage": 4.7,
-          "credit_rating": "BBB"
-        },
-        "cash_flow": {
-          "fcf_ltm_b": 1.5,
-          "capex_rev_pct": 0.027
-        }
-      },
-      "catalysts": [
-        {
-          "description": "ROSA robotic surgery platform installation acceleration",
-          "timeline": "H2 2026",
-          "probability_decimal": 0.55,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Quarterly ROSA installation count; procedure mix data"
-        },
-        {
-          "description": "Knee and hip procedure volume recovery post-backlog normalization",
-          "timeline": "2026-2027",
-          "probability_decimal": 0.65,
-          "impact_if_hit_pct": 12,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Quarterly procedure volume data; hospital utilization rates"
-        },
-        {
-          "description": "Margin expansion from operational efficiency program",
-          "timeline": "Q3-Q4 2026",
-          "probability_decimal": 0.50,
-          "impact_if_hit_pct": 10,
-          "impact_if_miss_pct": -3,
-          "monitor_signal": "Gross margin trend; SG&A as % of revenue; management commentary"
-        }
-      ],
-      "scenarios": {
-        "bull": {
-          "description": "ROSA drives share gains; procedure volumes rebound; margin expansion to 30%+; re-rate to peer multiples",
-          "price_target": 145.00,
-          "return_pct": 0.566,
-          "probability": 0.20
-        },
-        "base": {
-          "description": "Steady volume recovery; ROSA gradual adoption; EPS grows to $4.00-4.50; re-rate to 28x",
-          "price_target": 120.00,
-          "return_pct": 0.296,
-          "probability": 0.55
-        },
-        "bear": {
-          "description": "SYK continues taking share; execution stumbles; leverage constrains investment; procedure softness",
-          "price_target": 75.00,
-          "return_pct": -0.190,
-          "probability": 0.25
-        }
-      }
-    },
-    {
       "ticker": "MDT",
       "company": "Medtronic plc",
       "sector": "Healthcare",
       "current_price": 88.32,
       "pct_off_high": -0.346,
-      "composite_score": 6.3,
-      "recommendation": "SPECULATIVE BUY",
-      "target_price": 108.00,
-      "implied_upside": 0.223,
-      "expected_value_pct": 0.095,
-      "key_risk": "Innovation gap vs SYK/ABT; GLP-1 impact on procedure volumes; slow organic growth",
-      "key_catalyst": "Hugo robotic surgery launch; diabetes franchise stabilization; dividend support",
-      "analyst_consensus": "Hold",
+      "composite_score": 6.9,
+      "recommendation": "BUY",
+      "target_price": 110.00,
+      "implied_upside": 0.246,
+      "expected_value_pct": 0.112,
+      "key_risk": "Innovation gap vs SYK/ABT; GLP-1 impact on procedure volumes; execution risk on strategic pivot",
+      "key_catalyst": "MiniMed spin end-2026; Elliott-driven Investor Day mid-2026; PFA running +80%",
+      "analyst_consensus": "Buy",
+      "catalyst_name": "MiniMed diabetes spin-off",
+      "catalyst_date": "End 2026",
+      "selloff_type": "Confirmed inflection",
+      "criminal_flag": false,
+      "disqualifier_reason": null,
       "scores": {
         "valuation": {"score": 6.0},
         "balance_sheet": {"score": 7.5},
-        "catalyst": {"score": 5.0},
-        "selloff_quality": {"score": 6.0},
-        "industry_protection": {"score": 8.0},
-        "analyst_conviction": {"score": 5.5},
+        "catalyst_specificity": {"score": 6.5},
+        "selloff_quality": {"score": 5.5},
+        "competitive_moat_integrity": {"score": 7.0},
+        "macro_alignment": {"score": 8.0},
+        "analyst_conviction": {"score": 7.0},
         "justifications": {
-          "valuation": "24.5x trailing P/E vs 20x 5-yr avg; not deeply discounted but 3.2% div yield provides floor; reasonable on EV/EBITDA",
-          "balance_sheet": "ND/EBITDA 2.12x; A credit; $5.2B FCF; strong balance sheet with capacity for investment and M&A",
-          "catalyst": "Hugo robotic surgery system launch; diabetes continuous glucose monitoring improvements; cardiac rhythm management growth; but catalysts are slower-moving",
-          "selloff_quality": "Persistent innovation gap vs faster-growing SYK and ABT; GLP-1 drugs may reduce bariatric/cardiac procedure volumes long-term; execution concerns",
-          "industry_protection": "Medical devices are essential; aging population structural tailwind; hospital capex budgets recovering; diversified across many therapeutic areas",
-          "analyst_conviction": "Mostly hold-rated; analysts respect the franchise but want to see acceleration; consensus target offers modest upside"
+          "valuation": "15.6x fwd P/E vs 20x 5-yr avg; EV/EBITDA 14.4x below peer 18x; 3.2% dividend yield provides downside floor. Reasonable value but not screaming cheap — needs execution.",
+          "balance_sheet": "ND/EBITDA 2.12x; A credit rating; $5.2B FCF; strong balance sheet with capacity for investment and M&A. Interest coverage 8.2x. Can self-fund transformation.",
+          "catalyst_specificity": "MiniMed spin targeted end-2026 (named, dated, structural value unlock). Elliott-driven Investor Day mid-2026 with Growth + Operating Committees. Catalysts are concrete but execution-dependent, not pure binary outcomes.",
+          "selloff_quality": "Years of chronic underperformance BUT most recent quarter showed 6% organic growth (highest in 10 quarters). PFA running +80%, Symplicity reimbursement unlocked. Elliott engagement producing concrete board changes. Confirmed inflection, not just hope.",
+          "competitive_moat_integrity": "Cardiac rhythm, TAVR, and neuromodulation hold dominant share with high switching costs. PFA is genuine new growth vector. Diabetes segment is the weak link (CGM competitive pressure) but being spun off. Core franchise intact.",
+          "macro_alignment": "Medical devices are non-discretionary; hospital budgets recovering; aging population structural tailwind. MDT's diversified portfolio reduces cyclical risk. Government reimbursement provides demand floor.",
+          "analyst_conviction": "Goldman Sachs and JPMorgan recently UPGRADED (not just maintained). 19 buys, 12 holds, 0 sells. Analyst community sees the inflection — external validation of turnaround thesis."
         }
       },
       "valuation": {
-        "fwd_pe": 25.7,
+        "fwd_pe": 15.6,
         "sector_avg_pe": 25.0,
         "hist_5yr_pe": 20.0,
         "ev_ebitda": 14.4,
@@ -443,9 +361,9 @@
         "p_fcf": 21.8,
         "ev_sales": 4.0,
         "bear_target": 75.00,
-        "base_target": 108.00,
-        "bull_target": 130.00,
-        "analyst_avg_target": 100.00
+        "base_target": 110.00,
+        "bull_target": 135.00,
+        "analyst_avg_target": 105.00
       },
       "fundamentals": {
         "market_cap_b": 113.4,
@@ -454,7 +372,7 @@
         "rev_ntm_b": 34.5,
         "ebitda_margin": 0.275,
         "eps_ltm": 3.61,
-        "eps_ntm": 3.44,
+        "eps_ntm": 5.66,
         "eps_3yr_cagr": 0.04,
         "div_yield": 0.032,
         "balance_sheet": {
@@ -470,166 +388,55 @@
       },
       "catalysts": [
         {
-          "description": "Hugo robotic surgery platform commercial launch and adoption",
-          "timeline": "H2 2026 - 2027",
-          "probability_decimal": 0.50,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Hugo regulatory clearances; initial placements; surgeon feedback"
-        },
-        {
-          "description": "Diabetes franchise stabilization (CGM competitive dynamics)",
-          "timeline": "2026",
-          "probability_decimal": 0.45,
-          "impact_if_hit_pct": 10,
-          "impact_if_miss_pct": -5,
-          "monitor_signal": "Diabetes segment revenue growth; market share vs DXCM/ABT"
-        },
-        {
-          "description": "Cardiac rhythm and neuromodulation volume growth",
-          "timeline": "2026-2027",
-          "probability_decimal": 0.60,
-          "impact_if_hit_pct": 8,
-          "impact_if_miss_pct": -3,
-          "monitor_signal": "CRM and neuromod segment growth rates; product launches"
-        }
-      ],
-      "scenarios": {
-        "bull": {
-          "description": "Hugo succeeds; organic growth accelerates to 5%+; GLP-1 impact limited; re-rate to 22x fwd",
-          "price_target": 130.00,
-          "return_pct": 0.472,
-          "probability": 0.20
-        },
-        "base": {
-          "description": "Steady 3-4% organic growth; Hugo gradual rollout; dividend maintained; re-rate to 20x fwd",
-          "price_target": 108.00,
-          "return_pct": 0.223,
-          "probability": 0.55
-        },
-        "bear": {
-          "description": "Innovation gap widens; GLP-1s reduce procedure volumes; Hugo delays; growth stalls",
-          "price_target": 75.00,
-          "return_pct": -0.151,
-          "probability": 0.25
-        }
-      }
-    },
-    {
-      "ticker": "BSX",
-      "company": "Boston Scientific Corp.",
-      "sector": "Healthcare",
-      "current_price": 71.21,
-      "pct_off_high": -0.350,
-      "composite_score": 6.9,
-      "recommendation": "BUY",
-      "target_price": 95.00,
-      "implied_upside": 0.334,
-      "expected_value_pct": 0.165,
-      "key_risk": "Elevated valuation on trailing P/E; tariff risk on medical device supply chain",
-      "key_catalyst": "FARAPULSE PFA adoption curve; continued above-market organic growth; EP franchise dominance",
-      "analyst_consensus": "Buy",
-      "scores": {
-        "valuation": {"score": 5.5},
-        "balance_sheet": {"score": 7.0},
-        "catalyst": {"score": 7.5},
-        "selloff_quality": {"score": 7.5},
-        "industry_protection": {"score": 8.0},
-        "analyst_conviction": {"score": 7.5},
-        "justifications": {
-          "valuation": "36.7x trailing P/E looks expensive but reflects 12%+ organic growth; EV/EBITDA of 31x is rich; however P/FCF of 28.6x is more reasonable for a high-growth med-tech",
-          "balance_sheet": "ND/EBITDA 2.78x; BBB credit; $3.7B FCF; adequate for continued investment; leverage trending down",
-          "catalyst": "FARAPULSE pulsed field ablation is transforming electrophysiology; ACURATE neo2 TAVR gaining share; POLARx cryoablation; multiple near-term product launches driving above-market growth",
-          "selloff_quality": "Broad med-tech selloff driven by tariff fears and sector rotation, NOT company-specific issues; BSX was the top organic grower in med-tech before the selloff",
-          "industry_protection": "Cardiac rhythm management, electrophysiology, and interventional cardiology are essential procedures; aging population = structural demand growth",
-          "analyst_conviction": "Strong buy consensus; BSX was consensus overweight before selloff; most analysts view this as entry opportunity; target prices cluster around $95-115"
-        }
-      },
-      "valuation": {
-        "fwd_pe": 38.5,
-        "sector_avg_pe": 25.0,
-        "hist_5yr_pe": 30.0,
-        "ev_ebitda": 31.1,
-        "peer_avg_ev_ebitda": 18.0,
-        "p_fcf": 28.6,
-        "ev_sales": 5.8,
-        "bear_target": 60.00,
-        "base_target": 95.00,
-        "bull_target": 120.00,
-        "analyst_avg_target": 105.00
-      },
-      "fundamentals": {
-        "market_cap_b": 105.7,
-        "ev_b": 116.1,
-        "rev_ltm_b": 20.1,
-        "rev_ntm_b": 22.5,
-        "ebitda_margin": 0.184,
-        "eps_ltm": 1.94,
-        "eps_ntm": 1.85,
-        "eps_3yr_cagr": 0.15,
-        "div_yield": 0.0,
-        "balance_sheet": {
-          "net_cash_debt_b": -10.4,
-          "nd_ebitda": 2.78,
-          "interest_coverage": 11.4,
-          "credit_rating": "BBB"
-        },
-        "cash_flow": {
-          "fcf_ltm_b": 3.7,
-          "capex_rev_pct": 0.040
-        }
-      },
-      "catalysts": [
-        {
-          "description": "FARAPULSE pulsed field ablation global adoption acceleration",
-          "timeline": "Ongoing through 2026-2027",
-          "probability_decimal": 0.75,
+          "description": "MiniMed diabetes business spin-off — structural value unlock separating growth from drag",
+          "timeline": "End 2026",
+          "probability_decimal": 0.70,
           "impact_if_hit_pct": 20,
-          "impact_if_miss_pct": -8,
-          "monitor_signal": "EP procedure volumes; FARAPULSE market share; quarterly EP revenue growth"
+          "impact_if_miss_pct": -5,
+          "monitor_signal": "SEC filings; separation agreement; management commentary on timeline"
         },
         {
-          "description": "ACURATE neo2 TAVR gaining share in structural heart",
-          "timeline": "H2 2026",
-          "probability_decimal": 0.55,
+          "description": "Elliott-driven Investor Day with Growth + Operating Committee updates",
+          "timeline": "Mid 2026",
+          "probability_decimal": 0.80,
+          "impact_if_hit_pct": 10,
+          "impact_if_miss_pct": -3,
+          "monitor_signal": "Investor Day date announcement; board committee actions; ex-Stryker CFO contributions"
+        },
+        {
+          "description": "PFA (pulsed field ablation) continued +80% growth trajectory",
+          "timeline": "Quarterly earnings 2026",
+          "probability_decimal": 0.65,
           "impact_if_hit_pct": 12,
           "impact_if_miss_pct": -5,
-          "monitor_signal": "TAVR market share data; clinical outcomes publications; ACC/TCT presentations"
+          "monitor_signal": "Quarterly EP segment revenue; PFA adoption data; competitive share data"
         },
         {
-          "description": "Tariff resolution / exemption for medical devices",
-          "timeline": "Q2-Q3 2026",
-          "probability_decimal": 0.50,
-          "impact_if_hit_pct": 15,
-          "impact_if_miss_pct": -10,
-          "monitor_signal": "Trade policy announcements; medical device tariff exemption lobbying results"
-        },
-        {
-          "description": "Continued 12%+ organic revenue growth above med-tech peers",
-          "timeline": "Quarterly earnings",
-          "probability_decimal": 0.65,
-          "impact_if_hit_pct": 10,
-          "impact_if_miss_pct": -8,
-          "monitor_signal": "Quarterly organic growth rates; management guidance updates"
+          "description": "Symplicity renal denervation reimbursement ramp post-approval",
+          "timeline": "H2 2026",
+          "probability_decimal": 0.55,
+          "impact_if_hit_pct": 8,
+          "impact_if_miss_pct": -3,
+          "monitor_signal": "Procedure volumes; reimbursement code adoption; physician training pipeline"
         }
       ],
       "scenarios": {
         "bull": {
-          "description": "FARAPULSE dominates EP; TAVR share gains; 14%+ organic growth sustained; re-rate to 35x fwd EPS",
-          "price_target": 120.00,
-          "return_pct": 0.685,
+          "description": "MiniMed spin unlocks value; organic growth accelerates to 6%+; Elliott drives operational improvements; re-rate to 22x fwd P/E",
+          "price_target": 135.00,
+          "return_pct": 0.528,
           "probability": 0.25
         },
         "base": {
-          "description": "10-12% organic growth; FARAPULSE strong but competitive; tariffs manageable; re-rate to 30x fwd",
-          "price_target": 95.00,
-          "return_pct": 0.334,
+          "description": "Steady 4-5% organic growth; MiniMed spin on track; PFA drives EP acceleration; re-rate to 19x fwd",
+          "price_target": 110.00,
+          "return_pct": 0.246,
           "probability": 0.50
         },
         "bear": {
-          "description": "Tariffs hit margins; competitive pressure in EP; growth decelerates to 6-8%; remains at 25x fwd",
-          "price_target": 60.00,
-          "return_pct": -0.157,
+          "description": "MiniMed spin delayed; innovation gap persists; GLP-1s reduce procedure volumes; growth stalls at 2-3%",
+          "price_target": 75.00,
+          "return_pct": -0.151,
           "probability": 0.25
         }
       }
@@ -637,12 +444,31 @@
   ],
   "screened_out": [
     {
+      "ticker": "UNH",
+      "company": "UnitedHealth Group Inc.",
+      "sector": "Healthcare",
+      "filter_failed": "HARD FILTER: Criminal/DOJ probe",
+      "reason": "Active DOJ criminal AND civil investigations into Medicare Advantage billing, Optum Rx, and physician reimbursement. Criminal investigations of this scope take 3-6+ years to resolve. Liability is unmodelable. Management denied the investigation before being forced to acknowledge it — credibility is zero. Unbounded downside risk from fines, executive departures, customer defection, reputational damage.",
+      "revisit_if": "DOJ investigation formally closed with no charges OR confirmed as civil-only with quantified settlement range; stock must not have recovered above $400",
+      "disqualifier": "Criminal DOJ investigation — open-ended liability"
+    },
+    {
+      "ticker": "ZBH",
+      "company": "Zimmer Biomet Holdings Inc.",
+      "sector": "Healthcare",
+      "filter_failed": "HARD FILTER: Chronic underperformer, no confirmed inflection",
+      "reason": "Underperformed S&P 500 in 4 of last 5 years. 2026 guidance of 1-3% organic growth is below industry average. Losing US robotic surgery technology war to Stryker MAKO — structural share loss. Simultaneously disrupting own salesforce and running two competing robotic platforms (ROSA and mBOS). Goldman has Sell rating. 'Cheap for a reason' discount is earned.",
+      "revisit_if": "2+ consecutive quarters of organic growth above 4% (industry average) with documented robotic surgery share gains; Goldman or equivalent upgrades from Sell to Buy based on data, not hope",
+      "disqualifier": "Chronic underperformer — 3+ years of losing share to SYK with no confirmed inflection in reported numbers"
+    },
+    {
       "ticker": "BA",
       "company": "Boeing Co.",
       "sector": "Industrials",
       "filter_failed": "Recovery Filter",
-      "reason": "Stock recovered 65.7% within 52-week range ($129→$211); already past early recovery phase despite -52.7% from ATH",
-      "revisit_if": "Pullback to $160-170 range on production setback would create re-entry"
+      "reason": "Stock recovered 65.7% within 52-week range ($129 to $211); already past early recovery phase despite -52.7% from ATH",
+      "revisit_if": "Pullback to $160-170 range on production setback would create re-entry",
+      "disqualifier": null
     },
     {
       "ticker": "PFE",
@@ -650,23 +476,26 @@
       "sector": "Healthcare",
       "filter_failed": "Recovery + Balance Sheet",
       "reason": "92.5% recovered within 52w range (near 52w high $27.94); ND/EBITDA 3.95x exceeds 3.5x threshold",
-      "revisit_if": "Balance sheet deleveraging below 3.0x ND/EBITDA and meaningful pullback from current levels"
+      "revisit_if": "Balance sheet deleveraging below 3.0x ND/EBITDA and meaningful pullback from current levels",
+      "disqualifier": null
     },
     {
       "ticker": "EL",
       "company": "Estée Lauder Cos.",
-      "sector": "Consumer Defensive",
+      "sector": "Consumer Staples",
       "filter_failed": "Balance Sheet",
       "reason": "ND/EBITDA 33.8x; near-zero EBITDA margin; interest coverage 2.4x; balance sheet cannot withstand downturn",
-      "revisit_if": "EBITDA recovery to $2B+ (from ~$200M current) would normalize leverage to <3.5x"
+      "revisit_if": "EBITDA recovery to $2B+ (from ~$200M current) would normalize leverage to <3.5x",
+      "disqualifier": null
     },
     {
       "ticker": "KHC",
       "company": "Kraft Heinz Co.",
-      "sector": "Consumer Defensive",
+      "sector": "Consumer Staples",
       "filter_failed": "Balance Sheet",
       "reason": "Negative EBITDA in LTM period; negative interest coverage; value trap risk with persistent organic volume declines",
-      "revisit_if": "Return to positive EBITDA and demonstration of volume stabilization over 2+ quarters"
+      "revisit_if": "Return to positive EBITDA and demonstration of volume stabilization over 2+ quarters",
+      "disqualifier": null
     },
     {
       "ticker": "MRNA",
@@ -674,15 +503,17 @@
       "sector": "Healthcare",
       "filter_failed": "Recovery + Fundamentals",
       "reason": "90.3% recovered within 52w range; negative EBITDA (-$2.5B); negative FCF; burning cash; speculative pipeline-dependent",
-      "revisit_if": "RSV/flu vaccine commercial traction creates path to sustained profitability"
+      "revisit_if": "RSV/flu vaccine commercial traction creates path to sustained profitability",
+      "disqualifier": null
     },
     {
       "ticker": "BIIB",
       "company": "Biogen Inc.",
       "sector": "Healthcare",
       "filter_failed": "Recovery Filter",
-      "reason": "82.5% recovered within 52w range ($110→$186); strong balance sheet (ND/EBITDA 1.01x) but recovery largely done",
-      "revisit_if": "Pullback below $140 on pipeline setback would recreate the setup"
+      "reason": "82.5% recovered within 52w range ($110 to $186); strong balance sheet (ND/EBITDA 1.01x) but recovery largely done",
+      "revisit_if": "Pullback below $140 on pipeline setback would recreate the setup",
+      "disqualifier": null
     },
     {
       "ticker": "MRK",
@@ -690,7 +521,8 @@
       "sector": "Healthcare",
       "filter_failed": "Selloff Threshold",
       "reason": "Only -7.0% from 52-week high; -13.2% from ATH; insufficient selloff to meet 30% threshold",
-      "revisit_if": "Keytruda patent cliff (2028) fears drive larger selloff to $85-90 range"
+      "revisit_if": "Keytruda patent cliff (2028) fears drive larger selloff to $85-90 range",
+      "disqualifier": null
     },
     {
       "ticker": "BMY",
@@ -698,7 +530,8 @@
       "sector": "Healthcare",
       "filter_failed": "Selloff Threshold",
       "reason": "Only -3.5% from 52-week high; stock has recovered from LOE fears; insufficient selloff",
-      "revisit_if": "Reversal below $45 would recreate opportunity"
+      "revisit_if": "Reversal below $45 would recreate opportunity",
+      "disqualifier": null
     },
     {
       "ticker": "RTX",
@@ -706,7 +539,8 @@
       "sector": "Defense / Aerospace",
       "filter_failed": "Selloff Threshold",
       "reason": "Only -5.2% from 52-week high; defense stocks near all-time highs on geopolitical tailwinds",
-      "revisit_if": "Defense budget cut fears or contract cancellation drives selloff >30%"
+      "revisit_if": "Defense budget cut fears or contract cancellation drives selloff >30%",
+      "disqualifier": null
     },
     {
       "ticker": "CVS",
@@ -714,15 +548,17 @@
       "sector": "Healthcare",
       "filter_failed": "Balance Sheet",
       "reason": "ND/EBITDA 8.41x far exceeds 3.5x threshold; massive debt from Aetna/Signify/Oak Street acquisitions",
-      "revisit_if": "Aggressive deleveraging below 4x ND/EBITDA; Oak Street/Signify turnaround proof"
+      "revisit_if": "Aggressive deleveraging below 4x ND/EBITDA; Oak Street/Signify turnaround proof",
+      "disqualifier": null
     },
     {
       "ticker": "DG",
       "company": "Dollar General",
-      "sector": "Consumer Defensive",
+      "sector": "Consumer Staples",
       "filter_failed": "Balance Sheet",
       "reason": "ND/EBITDA 4.49x exceeds 3.5x threshold; operational execution issues; store-level deterioration",
-      "revisit_if": "New management execution; deleveraging below 3.5x; same-store sales recovery"
+      "revisit_if": "New management execution; deleveraging below 3.5x; same-store sales recovery",
+      "disqualifier": null
     }
   ],
   "assumptions": {
@@ -742,11 +578,9 @@
       {"label": "Recovery Filter", "value": "<50% within 52-week range", "notes": "Screens out stocks that have already recovered significantly", "source": "Custom filter to catch early-stage bottoming"}
     ],
     "peer_groups": [
+      {"ticker": "BSX", "peers": "MDT, ABT, EW, SYK", "rationale": "Cardiovascular and interventional device companies with EP/structural heart exposure", "exclusions": "JNJ MedTech (different conglomerate structure)"},
       {"ticker": "NVO", "peers": "LLY, ABBV, MRK, PFE", "rationale": "Large-cap pharma with GLP-1/obesity exposure", "exclusions": "AZN (different therapeutic focus)"},
-      {"ticker": "UNH", "peers": "CI, ELV, HUM, CNC", "rationale": "Managed care organizations with Medicare Advantage exposure", "exclusions": "CVS Aetna (balance sheet issues)"},
-      {"ticker": "ZBH", "peers": "SYK, MDT (ortho segment)", "rationale": "Orthopedic implant and robotic surgery companies", "exclusions": "GMED (smaller scale)"},
-      {"ticker": "MDT", "peers": "ABT, SYK, BSX, EW", "rationale": "Diversified large-cap medical device companies", "exclusions": "JNJ MedTech (different conglomerate structure)"},
-      {"ticker": "BSX", "peers": "MDT, ABT, EW", "rationale": "Cardiovascular and interventional device companies", "exclusions": "SYK (different sub-specialty focus)"}
+      {"ticker": "MDT", "peers": "ABT, SYK, BSX, EW", "rationale": "Diversified large-cap medical device companies", "exclusions": "JNJ MedTech (different conglomerate structure)"}
     ],
     "data_sources": [
       {"name": "Financial Modeling Prep (FMP) API", "description": "Fundamentals, ratios, estimates, price targets", "as_of_date": "March 17, 2026", "notes": "Primary quantitative data source; stable API endpoints"},
